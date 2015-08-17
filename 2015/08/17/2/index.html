@@ -1,0 +1,571 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>第二章，算法分析 | GaRiboy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Yueze_Zhang">
+    
+
+    
+    <meta name="description" content="在这一章，我们将讨论：
+
+如何估计一个程序所需要的时间。
+如何将一个程序的运行时间从天降低到秒。
+粗心的使用递归的后果。
+将一个数自乘得到其幂以及计算两个数的最大公约数的非常有效的算法。
+
+##数学基础
+###1. 定义我们将使用下面四个定义：
+
+
+如果存在正常数c和n0使得当N &amp;gt;= n0时T(N) =&amp;lt; cf(N), 则记为T(N) = O(f(N))
+如果存在正常数c和n0使得当">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第二章，算法分析">
+<meta property="og:url" content="http://yoursite.com/2015/08/17/2/index.html">
+<meta property="og:site_name" content="GaRiboy">
+<meta property="og:description" content="在这一章，我们将讨论：
+
+如何估计一个程序所需要的时间。
+如何将一个程序的运行时间从天降低到秒。
+粗心的使用递归的后果。
+将一个数自乘得到其幂以及计算两个数的最大公约数的非常有效的算法。
+
+##数学基础
+###1. 定义我们将使用下面四个定义：
+
+
+如果存在正常数c和n0使得当N &amp;gt;= n0时T(N) =&amp;lt; cf(N), 则记为T(N) = O(f(N))
+如果存在正常数c和n0使得当">
+<meta property="og:updated_time" content="2015-08-17T06:28:58.926Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第二章，算法分析">
+<meta name="twitter:description" content="在这一章，我们将讨论：
+
+如何估计一个程序所需要的时间。
+如何将一个程序的运行时间从天降低到秒。
+粗心的使用递归的后果。
+将一个数自乘得到其幂以及计算两个数的最大公约数的非常有效的算法。
+
+##数学基础
+###1. 定义我们将使用下面四个定义：
+
+
+如果存在正常数c和n0使得当N &amp;gt;= n0时T(N) =&amp;lt; cf(N), 则记为T(N) = O(f(N))
+如果存在正常数c和n0使得当">
+
+    
+    <link rel="alternative" href="/atom.xml" title="GaRiboy" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="GaRiboy" title="GaRiboy"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="GaRiboy">GaRiboy</a></h1>
+				<h2 class="blog-motto">Walk step</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/08/17/2/" title="第二章，算法分析" itemprop="url">第二章，算法分析</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Yueze_Zhang" target="_blank" itemprop="author">Yueze_Zhang</a>
+		
+  <p class="article-time">
+    <time datetime="2015-08-17T05:58:22.000Z" itemprop="datePublished"> 发表于 2015-08-17</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-_O(N)"><span class="toc-number">1.</span> <span class="toc-text">3. O(N)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-_Ω(N)"><span class="toc-number">2.</span> <span class="toc-text">4. Ω(N)</span></a></li></ol>
+		
+		</div>
+		
+		<p>在这一章，我们将讨论：</p>
+<ul>
+<li>如何估计一个程序所需要的时间。</li>
+<li>如何将一个程序的运行时间从天降低到秒。</li>
+<li>粗心的使用递归的后果。</li>
+<li>将一个数自乘得到其幂以及计算两个数的最大公约数的非常有效的算法。</li>
+</ul>
+<p>##数学基础</p>
+<p>###1. 定义<br>我们将使用下面四个定义：</p>
+<blockquote>
+<ol>
+<li>如果存在正常数<em>c</em>和<em>n0</em>使得当<em>N &gt;= n0</em>时<em>T(N) =&lt; cf(N)</em>, 则记为<em>T(N) = O(f(N))</em></li>
+<li>如果存在正常数<em>c</em>和<em>n0</em>使得当<em>N &gt;= n0</em>时<em>T(N) &gt;= cg(N)</em>, 则记为<em>T(N) = Omega(f(N))</em></li>
+<li><em>T(N) = (h(N))</em>当且仅当<em>T(N) = O(h(N))</em>和<em>T(N) = (h(N))</em></li>
+<li>如果对所有的常数<em>c</em>存在<em>n0</em>使得当<em>N &gt; n0</em>时<em>T(N)&lt; cp(N)</em>,则记为<em>T(N) = o(P(N))</em></li>
+</ol>
+</blockquote>
+<p>这些定义的目的是要在函数之间建立一种相对应的级别。我们将比较它们的相对增长率(relative rate of growth)</p>
+<p>我们来看这四个定义：<br>当N较小的时候，1000N是要大于N^2的，但N^2的增长率则更快，所以总有一个数n0，使得N^2 &gt; 1000N, 在我们的例子中，T(N) = 1000N, f(N) = N^2.</p>
+<p>如果我们用传统的不等式来比较增长率，<br>第一个定义就是说T(N)的增长率小于等于f(N)的增长率，<br>第二个定义T（N）= Omega(g(N))就是说T(N)的增长率大于等于g(N)的增长率<br>第三个定义T(N) = (h(N))是说T(N)的增长率等于h(N)的增长率。<br>第四个定义T(N) = o(P(N))是说T(N)的增长率小于P(N)的增长率，它不同于O，因为O</p>
+<p>我们举一个例子，一组数从a1到an，然后按照需求进行排序，排序后每个数字只出现一次，使得a1’&lt; a2’&lt; a3’……。我们先用插值排序来计算它的所需时间<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InsertSort</span> <span class="params">(<span class="keyword">int</span> *arr, <span class="keyword">int</span> size)</span>  </span><br><span class="line"></span>&#123;  </span><br><span class="line">    <span class="keyword">int</span> fOut, loc, temp;  </span><br><span class="line">    <span class="keyword">for</span> (fOut = <span class="number">1</span>;fOut &lt; size; fOut++)  </span><br><span class="line">        <span class="keyword">if</span>(arr[fOut] &lt; arr[fOut-<span class="number">1</span>])  </span><br><span class="line">        &#123;  </span><br><span class="line">            temp = arr[fOut];  </span><br><span class="line">            loc = fOut;  </span><br><span class="line">            <span class="keyword">do</span>  </span><br><span class="line">            &#123;  </span><br><span class="line">                arr[loc] = arr[loc - <span class="number">1</span>];  </span><br><span class="line">                loc--;  </span><br><span class="line">            &#125;<span class="keyword">while</span>(loc &gt; <span class="number">0</span> &amp;&amp; arr[loc - <span class="number">1</span>] &gt; temp);  </span><br><span class="line">            arr[loc] = temp;  </span><br><span class="line">        &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>假设给定数组：8，2，4，9，3，6<br>则第一次排序：2，8，4，9，3，6<br>则第二次排序：2，4，8，9，3，6<br>则第三次排序：2，4，8，9，3，6<br>则第四次排序：2，3，4，8，9，6<br>则第四次排序：2，3，4，6，8，9</p>
+<p>一般来说我们想知道算法运行时间的<strong>上限</strong>,这样方便用户进行更好的操作。算法的运行时间取决于好多因素，其中一个因素是输入本身，另一个因素是数据规模。通常我们处理输入的方式是将输入参数化，我们会把运行时间看作对待排列数据规模的。</p>
+<p>所以我们<strong>T(n)</strong>定义为输入规模为<strong>n</strong>时的最长运行时间。<br>『<em>我们有时候也讨论程序所需要的平均时间，这里T(n)就成了输入规模n之下所有可能输入的期望时间，什么是期望时间呢？每种输入运行的时间乘以那种输入出现的概率就是期望时间。</em>』</p>
+<p>算法运行时间的上限还取决于计算机的运行速度。所以当我们比较算法时，我们比较的是算法间的相对速度。<strong>忽略掉那些依赖于机器的常量，不去检验实际运行时间，而关注运行时间的增长。</strong></p>
+<p>所以说在不同的机器上跑同样的算法，最长情况时间总是不一样的，我们得想方设法去除机器性能的影响，而只是去单单分析算法本身的优劣，以便于在具体量化算法性能的时候又能去除机器因素的影响，因为我们讲算法分析而不是计算机系统分析。于是有人发明了Θ符号。对于这个符号我们来看几个例子，再看定义</p>
+<p>###2. Θ(N)###<br>Θ符号掌握起来很简单，你要做的就是写个公式，抛<strong>弃他的低阶项，忽略前面的常数因子。</strong><br>例如：如果公式为 $a <em> x ^2 + b </em> x + c = f(x)$</p>
+<p>那么有<br> $$Θ（x^2）= f(x)$$</p>
+<p>如果n趋向于无穷大的时候，总会有<br> $$thea（x) &lt; thea（x^2)$$</p>
+<p>也就是说它相当于取出f(x)的最高次项然后去掉其常数因子，然后放入Θ（）中，而放入Θ（）中又表示了什么呢？为了弄清楚这个问题，我们来看其定义：</p>
+<blockquote>
+<p>Θ(g(n)) = f(n) : 存在某个常数 c1, c2, 和n0，使得当 n &gt; = n0时，有 0 &lt; = c1 <em> g(n) &lt; = f(n) &lt; = c2 </em> g(n)</p>
+</blockquote>
+<p>从后面半句开始，</p>
+<blockquote>
+<p>存在 n &gt; n0, 0 &lt; = c1 * g(n)</p>
+</blockquote>
+<p>这里保证了g(n)是一个<strong>增函数</strong>。接着有 </p>
+<p>$$c1 <em> g(n) &lt;=  f(n)  &lt;= c2 </em> g(n)$$</p>
+<p>在脑海里可以想象出来函数图像 [ c1 <em> g(n),c2 </em> g(n) ]这个区间实际上是摇摆的曲线.如果把g(n)看做是y = x这样的正比例函数，就是一个扇形是吧？一根曲线摇摆着，扫出一个扇形来。而f(n)就是这组成扇形的众多曲线中的一根！这里也就是说，无论g(n)是什么，总能有一个常数因子使得<br>$$c1 * f(n) =g(n).$$<br>再返回来原来的题目中去理解：</p>
+<p>$$a <em> x ^2 + b </em> x + c = f(x)$$</p>
+<p>那么有<br>$$Θ（x^2）= f(x)$$</p>
+<p>这里Θ（x^2）表示，在x趋于无穷大这个过程中，有一个常数c使得<br>$$c <em> n^2 = a </em> x ^2 + b <em> x +c = f(x)$$也就是：<em>*同!阶!数!(见高数上)</em></em>.</p>
+<p>这样，我们用Θ（）来描述先程序的性能 n^2 + n 变成了Θ（n ^ 2）,这里表明:</p>
+<p>在n趋于无穷大的过程中，总有一个常数因子使得<br>$$c * n^2 = n ^2 + n$$</p>
+<p>这个常数因子c在上文中说到，由机器和其它非算法因素来决定。也就是说，我们用Θ（n ^ 2）来表示一个算法的性能的时候，我们就完全忽略了机器，只研究算法本身，它好像是说：无论你在什么机器上跑这个算法，只要输入规模足够大，你的性能都是n ^ 2的整数倍，至于是多少倍，由机器决定的，反正在同样的机器上，这个倍数是相等了。</p>
+<p>回到插值排序计算最坏情况时间：</p>
+<p>对于每一个J的取值，循环会做多少次操作呢? 在渐近上，这等于j乘上某个常数，所以应该是Θ(j)<br>看看循环次数计算一下时间 $$T(n)=\sum_{j=1}^nΘ(j) = Θ(n^2)$$<br>（因为（求和：fOut从1到size）就等于1+2+3+……算数级数求和）<br>插值排序对于n很小的时候很快，但对于n很大的时候就时间很长了。</p>
+<p>然后我们引入一种新的排序方式与其做对比——<strong>归并排序</strong></p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;time.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Merge</span><span class="params">(<span class="keyword">int</span> *R,<span class="keyword">int</span> low,<span class="keyword">int</span> m,<span class="keyword">int</span> high)</span></span>;    <span class="comment">// 这个函数用来将两个排好序的数组进行合并</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MergeSort</span><span class="params">(<span class="keyword">int</span> R[],<span class="keyword">int</span> low,<span class="keyword">int</span> high)</span></span>;    <span class="comment">//这个函数用来将问题细分</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">10</span>];</span><br><span class="line">    <span class="keyword">int</span> low = <span class="number">0</span>,high = <span class="number">9</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"请输入10个正整数:\n"</span>);</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        rescan:</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;a[i]) != <span class="number">1</span>) </span><br><span class="line">	    &#123;</span><br><span class="line">	        fflush(<span class="built_in">stdin</span>);</span><br><span class="line">	        <span class="built_in">printf</span>(<span class="string">"非法输入!\n"</span>);</span><br><span class="line">	        <span class="keyword">goto</span> rescan;</span><br><span class="line">	    &#125;</span><br><span class="line">	 <span class="comment">//输入10个数，并判断是否为正整数</span></span><br><span class="line">    &#125;</span><br><span class="line">    MergeSort(a,low,high);</span><br><span class="line">    <span class="keyword">for</span>(i = low;i &lt;= high;i++)</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d "</span>,a[i]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Merge</span><span class="params">(<span class="keyword">int</span> *R,<span class="keyword">int</span> low,<span class="keyword">int</span> m,<span class="keyword">int</span> high)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = low,j = m + <span class="number">1</span>,p = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> *R1;          <span class="comment">// 动态分配内存,分给左右2个数组m和high(他这里倒不如用Left和Right更清楚)</span></span><br><span class="line">    R1=(<span class="keyword">int</span> *)<span class="built_in">malloc</span>((high - low + <span class="number">1</span>) *<span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">    <span class="keyword">if</span> (!R1) <span class="keyword">return</span>; <span class="comment">//只要有一个数组到达了尾部就要跳出</span></span><br><span class="line"><span class="comment">// 进行合并</span></span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">    <span class="keyword">while</span>(i &lt;= m &amp;&amp; j &lt;= high) </span><br><span class="line">        R1[p++] = (R[i] &lt;= R[j]) ? R[i++] : R[j++];    <span class="comment">// 把较小的那个数据放到结果数组里， 同时移动指针</span></span><br><span class="line">    <span class="keyword">while</span>(i&lt;=m) </span><br><span class="line">        R1[p++]=R[i++];    <span class="comment">//如果 m 还有元素，把剩下的数据直接放到结果数组</span></span><br><span class="line">    <span class="keyword">while</span>(j&lt;=high) </span><br><span class="line">        R1[p++]=R[j++];    <span class="comment">//如果 high 还有元素，把剩下的数据直接放到结果数组</span></span><br><span class="line">    <span class="keyword">for</span>(p=<span class="number">0</span>,i=low;i&lt;=high;p++,i++)</span><br><span class="line">        R[i]=R1[p];        <span class="comment">//把结果数组 复制 到 数组R 里</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MergeSort</span><span class="params">(<span class="keyword">int</span> R[],<span class="keyword">int</span> low,<span class="keyword">int</span> high)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">     <span class="keyword">int</span> mid;</span><br><span class="line">     <span class="keyword">if</span>(low&lt;high)</span><br><span class="line">     &#123; </span><br><span class="line">    	 <span class="comment">// 归并的基本思想</span></span><br><span class="line">    	 mid=(low+high)/<span class="number">2</span>;</span><br><span class="line">    	 MergeSort(R,low,mid);<span class="comment">// 排左边</span></span><br><span class="line">    	 MergeSort(R,mid+<span class="number">1</span>,high);<span class="comment">// 排右边</span></span><br><span class="line">    	 Merge(R,low,mid,high);<span class="comment">// 合并</span></span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>归并排序我们做的就是递归地对A[1到n/2]这部分，以及A[n/2+1到n]这部分排序。<br>所以我们的输入是分为两部分的。第三步，我们把排序好的两个表归并，对于归并排序，每一步我们只需要关注两组数中元素大小，<br>所以对于总数为N的输入，时间是：$$T(n)=2T(n/2)+Θ(n)=Θ(n*lgn)$$  </p>
+<p>你看，Θ（(n*lgn）表示的不就是机器无关的，纯算法的性能了吗？原来的问题解决了。</p>
+<p>不过Θ（(n*lgn）符号还使得我们只关注最高次幂，不去关注低次项，因为在n-&gt;无穷大的时候，低次项是没有意义的，因为此时只要n变化一点点，就足以抵消低次项的变化（其实还是同阶数）。</p>
+<p>这两种算法Θ（）并不相同，代表他们最坏情况所需时间也并不一样</p>
+<p>所以我们知道，对于一个时间复杂度为Θ（(n<em>lgn）的算法，它的时间性能是优于Θ（n^2）的算法的，这里我们没有考虑常数因子，即使Θ（n</em>lgn）的常数因子是10000000000000而Θ（n^2）的常数因子是1也没有关系，因为无论如何，总有一个值n0使得n越过这个点之后Θ（n<em>lgn）的算法总能打败Θ（n^2）的算法，也就是说使用了Θ这类的符号（渐进符号）去比较算法时间性能的时候，是与机器无关的，即使你在超级计算机上跑Θ（n^2）算法，只要输入规模和时间足够，跑Θ（n</em>lgn）算法的老式386机子总能打败超级计算机。</p>
+<p>类似于Θ符号我们引出了O符号（读作大o）。</p>
+<h3 id="3-_O(N)">3. O(N)</h3><blockquote>
+<p>O（g(n)） = {f(n) : 存在某个常数c,和n0，使得当n &gt;= n0 时，有 0 &lt;= f(n) &lt;= c *g(n) </p>
+</blockquote>
+<p>这里我们就只关心最坏情况，我们在谈论一个算法的最坏情况时间复杂度的时候总是喜欢使用O符号，我通过前面的例子来说明这个O符号的作用。</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">For<span class="comment">(I = 0,I &lt; n ; I ++)</span></span><br><span class="line"></span><br><span class="line">       For<span class="comment">(J = 0; j &lt; n ; j++)</span>;</span><br><span class="line"></span><br><span class="line">For <span class="comment">(cnt = 0; cnt &lt; n ; cnt ++)</span>;</span><br></pre></td></tr></table></figure>
+<p>这时候我们把机器执行的速度看做单位1，于是执行的时间是n^2 + n，我们会说，上面这个算法最坏情况时间复杂度是O(n^2)。</p>
+<p>还是同样的目的，我们不去考虑机器本身的影响，因为机器执行的速度如果是c，那么时间也就是变成了(n^2 + n) / c,也只是常数因子的问题而已。在输入规模足够大的情况下，我们用O（n^ 2）来忽略机器的影响，只考虑算法本身的最坏情况，告诉别人： 嘿！无论你在什么机器上跑，你的最坏情况都不能比n ^ 2 这个值的x倍更坏啦。至于X倍是多少倍，反正我们只是研究算法的，只有做机器的人才知道X是多少倍，而我们比较算法的时候，不会在不同的机器上去测同样的算法然后拿来比较，往往在同样的机器上去考察一个算法，这时常数因子X是相等的，关心它也是多余的了。</p>
+<p>这就好比我们高考的时候每个人的分数都乘以10分然后再来报考，结果还不是一样？因为考大学是根据排名来录取的，所以对于算法也是一样的，我们只关注：“那个算法才是最好的？我们应该选择哪个算法？”这种比较性的问题。</p>
+<h3 id="4-_Ω(N)">4. Ω(N)</h3><blockquote>
+<p>函数f(n) = Ω(g(n))（念作f(n)是g(n)的omega），当且仅当存在正常数c和n0，使得对于所有n (n &gt;= n0)，满足f(n) &gt;= c * g(n)。</p>
+</blockquote>
+<p>Ω(N)给出了算法运行时间的下界，也就是最好情况下的时间复杂度</p>
+<p>基础的数学知识就科普到这里。下面咱们来谈谈如何计算 O(N)</p>
+<hr>
+<p>##运行时间计算</p>
+<p>###一个简单的例子</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2015/08/17/2/" data-title="第二章，算法分析 | GaRiboy" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/08/17/my-post/"  title="第一章 引论">
+ <strong>下一篇：</strong><br/> 
+ <span>第一章 引论
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-_O(N)"><span class="toc-number">1.</span> <span class="toc-text">3. O(N)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-_Ω(N)"><span class="toc-number">2.</span> <span class="toc-text">4. Ω(N)</span></a></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>1</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/博客，文章/" title="博客，文章">博客，文章<sup>1</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Larry Page in Google. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="Yueze_Zhang">Yueze_Zhang</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
