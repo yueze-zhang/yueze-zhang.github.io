@@ -41,7 +41,7 @@
 
 如果存在正常数c和n0使得当N &amp;gt;= n0时T(N) =&amp;lt; cf(N), 则记为T(N) = O(f(N))
 如果存在正常数c和n0使得当">
-<meta property="og:updated_time" content="2015-08-17T06:28:58.926Z">
+<meta property="og:updated_time" content="2015-08-17T07:40:03.395Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第二章，算法分析">
 <meta name="twitter:description" content="在这一章，我们将讨论：
@@ -162,7 +162,7 @@
 <p>所以我们<strong>T(n)</strong>定义为输入规模为<strong>n</strong>时的最长运行时间。<br>『<em>我们有时候也讨论程序所需要的平均时间，这里T(n)就成了输入规模n之下所有可能输入的期望时间，什么是期望时间呢？每种输入运行的时间乘以那种输入出现的概率就是期望时间。</em>』</p>
 <p>算法运行时间的上限还取决于计算机的运行速度。所以当我们比较算法时，我们比较的是算法间的相对速度。<strong>忽略掉那些依赖于机器的常量，不去检验实际运行时间，而关注运行时间的增长。</strong></p>
 <p>所以说在不同的机器上跑同样的算法，最长情况时间总是不一样的，我们得想方设法去除机器性能的影响，而只是去单单分析算法本身的优劣，以便于在具体量化算法性能的时候又能去除机器因素的影响，因为我们讲算法分析而不是计算机系统分析。于是有人发明了Θ符号。对于这个符号我们来看几个例子，再看定义</p>
-<p>###2. Θ(N)###<br>Θ符号掌握起来很简单，你要做的就是写个公式，抛<strong>弃他的低阶项，忽略前面的常数因子。</strong><br>例如：如果公式为 $a <em> x ^2 + b </em> x + c = f(x)$</p>
+<p>###2. Θ(N)<br>Θ符号掌握起来很简单，你要做的就是写个公式，抛<strong>弃他的低阶项，忽略前面的常数因子。</strong><br>例如：如果公式为 $$a <em> x ^2 + b </em> x + c = f(x)$$</p>
 <p>那么有<br> $$Θ（x^2）= f(x)$$</p>
 <p>如果n趋向于无穷大的时候，总会有<br> $$thea（x) &lt; thea（x^2)$$</p>
 <p>也就是说它相当于取出f(x)的最高次项然后去掉其常数因子，然后放入Θ（）中，而放入Θ（）中又表示了什么呢？为了弄清楚这个问题，我们来看其定义：</p>
@@ -213,6 +213,16 @@
 		<footer class="article-footer clearfix">
 <div class="article-catetags">
 
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/数据结构与算法/">数据结构与算法</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/博客，文章/">博客，文章</a>
+  </div>
 
 </div>
 
@@ -266,7 +276,7 @@
 		<ul>
 		
 		  
-			<li><a href="/categories/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>1</sup></a></li>
+			<li><a href="/categories/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>2</sup></a></li>
 		  
 		
 		</ul>
@@ -279,7 +289,7 @@
 		<ul class="clearfix">
 		
 			
-				<li><a href="/tags/博客，文章/" title="博客，文章">博客，文章<sup>1</sup></a></li>
+				<li><a href="/tags/博客，文章/" title="博客，文章">博客，文章<sup>2</sup></a></li>
 			
 		
 		</ul>
