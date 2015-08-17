@@ -39,7 +39,7 @@
 
 如果存在正常数c和n0使得当N &amp;gt;= n0时T(N) =&amp;lt; cf(N), 则记为T(N) = O(f(N))
 如果存在正常数c和n0使得当N &amp;gt;">
-<meta property="og:updated_time" content="2015-08-17T07:42:16.837Z">
+<meta property="og:updated_time" content="2015-08-17T12:25:44.202Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="第二章，算法分析">
 <meta name="twitter:description" content="在这一章，我们将讨论：
@@ -129,7 +129,7 @@
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
 		
-			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数学基础"><span class="toc-number">1.</span> <span class="toc-text">数学基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_定义"><span class="toc-number">1.1.</span> <span class="toc-text">1. 定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-_O(N)"><span class="toc-number">1.2.</span> <span class="toc-text">3. O(N)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-_Ω(N)"><span class="toc-number">1.3.</span> <span class="toc-text">4. Ω(N)</span></a></li></ol></li></ol>
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数学基础"><span class="toc-number">1.</span> <span class="toc-text">数学基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_定义"><span class="toc-number">1.1.</span> <span class="toc-text">1. 定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-_O(N)"><span class="toc-number">1.2.</span> <span class="toc-text">3. O(N)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-_Ω(N)"><span class="toc-number">1.3.</span> <span class="toc-text">4. Ω(N)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运行的时间"><span class="toc-number">2.</span> <span class="toc-text">运行的时间</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一般法则"><span class="toc-number">2.1.</span> <span class="toc-text">一般法则</span></a></li></ol></li></ol>
 		
 		</div>
 		
@@ -202,8 +202,50 @@
 <p>Ω(N)给出了算法运行时间的下界，也就是最好情况下的时间复杂度</p>
 <p>基础的数学知识就科普到这里。下面咱们来谈谈如何计算 O(N)</p>
 <hr>
-<p>##运行时间计算</p>
-<p>###一个简单的例子</p>
+<h2 id="运行的时间">运行的时间</h2><h3 id="一般法则">一般法则</h3><ol>
+<li>FOR循环：<br>一个FOR循环运行时间至多是该FOR循环内语句的运行时间乘以迭代次数。</li>
+<li><p>嵌套的FOR循环：<br>从里向外分析FOR循环。在一次嵌套循环内部的每条语句总的运行时间为该语句的运行时间乘以该组所有的FOR循环的大小的乘积。<br>举一个例子：O(N^2)</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">    <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; N; j++)</span><br><span class="line">        k++;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>顺序结构：<br>将各个语句的运行时间求和即可。<br>举个例子：下面这个程序先用去O(N),再用去O(N^2),总的时间开销还是O(^2)</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">    A[ i ] = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">    <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; N; j++)</span><br><span class="line">        k++;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>IF/ELSE 语句<br>一个判断语句的运行时间不超过分支运行里最常的。</p>
+</li>
+</ol>
+<p>###最大子序列和问题的解<br>我们来举一个大一点的例子，这个例子将要用四个算法来求解最大子序列问题。<br>我们先来科普一下什么叫最大子序列和问题：.</p>
+<blockquote>
+<p>给定一整数序列A1， A2，… An （可能有负数），求A1~An的一个子序列Ai~Aj，使得Ai到Aj的和最大 </p>
+</blockquote>
+<p>例如：整数序列-2, 11, -4, 13, -5, 2, -5, -3, 12, -9的最大子序列的和为21。对于这个问题，最简单也是最容易想到的那就是穷举所有子序列的方法。利用三重循环，依次求出所有子序列的和然后取最大的那个。当然算法复杂度会达到O(n^3)y因为这里面包含一个三重嵌套的FOR循环。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">   <span class="function"><span class="keyword">int</span> <span class="title">maxSubSum1</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> size )</span>   </span><br><span class="line"></span>&#123;  </span><br><span class="line">    <span class="keyword">int</span> maxSum = <span class="number">0</span>;  </span><br><span class="line">    <span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; i++ )  </span><br><span class="line">        <span class="keyword">for</span> ( <span class="keyword">int</span> j = <span class="number">1</span>; j &lt; size; j++ )   </span><br><span class="line">        &#123;  </span><br><span class="line">             <span class="keyword">int</span> thisSum = <span class="number">0</span>;  </span><br><span class="line">             <span class="keyword">for</span> ( <span class="keyword">int</span> k = i; k &lt;= j; k++ )  </span><br><span class="line">                 thisSum += a[k];  </span><br><span class="line">             <span class="keyword">if</span> ( thisSum &gt; maxSum )  </span><br><span class="line">                maxSum = thisSum;  </span><br><span class="line">        &#125;  </span><br><span class="line">    <span class="keyword">return</span> maxSum;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个代码的第8、9行太好为时间了,算法本身很容易理解，而且很直观的感觉做了很多无用操作。例如：i = 0, j = 3时，会计算a[0] + a[1] +…+ a[3]；而当i = 0, j = 4时候又会计算a[0] + a[1] +…a[4]。<br>所以我们对他改进，改进之后算法用时为O(N^2).</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">maxSubSum2</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; a)</span> </span><br><span class="line"></span>&#123; </span><br><span class="line">       <span class="keyword">long</span> maxSum = <span class="number">0</span>; </span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; a.size(); i++) </span><br><span class="line">       &#123; </span><br><span class="line">              <span class="keyword">long</span> thisSum = <span class="number">0</span>; </span><br><span class="line">              <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt; a.size(); j++) </span><br><span class="line">              &#123; </span><br><span class="line">                     thisSum += a[j]; </span><br><span class="line">                     <span class="keyword">if</span> (thisSum &gt; maxSum) </span><br><span class="line">                            maxSum = thisSum; </span><br><span class="line">              &#125; </span><br><span class="line">       &#125; </span><br><span class="line">       <span class="keyword">return</span> maxSum; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这是一个非常直观的穷举法（比上面的分析还有简单些），而且没有多余重复的操作，复杂度为O(N^2) 。其中，thisSum表示a[i] + a[i+1] + … + a[j-1]。</p>
+<p>对这个问题，有一个相对复杂的O(NlogN)的解法，就是使用递归。如果要是求出序列的位置的话，这将是最好的算法了（因为我们后面还会有个O(N)的算法，但是不能求出最大子序列的位置）。该方法我们采用“分治策略”（divide-and-conquer）。</p>
+<p>先简单总结下分治递归的基本过程：</p>
+<pre><code><span class="number">1</span>. 传入待处理的序列集合，及初始下标(iLeft)和终点下标(iRight=N-<span class="number">1</span>,N为元素个数)
+<span class="number">2</span>. 处理小容量问题 e.g:<span class="keyword">if</span>(iLeft == iRight)<span class="decorator">{....}</span>
+<span class="number">3</span>. 将数据从中间分成两部分并将前后两部分依次递归调用。
+<span class="number">4</span>. 处理每个子段的过程。
+</code></pre><p>在我们例子中，最大子序列可能在三个地方出现，或者在左半部，或者在右半部，或者跨越输入数据的中部而占据左右两部分。前两种情况递归求解，第三种情况的最大和可以通过求出前半部分最大和（包含前半部分最后一个元素）以及后半部分最大和（包含后半部分的第一个元素）相加而得到。</p>
+<table>
+<thead>
+<tr>
+<th>前半部分</th>
+<th style="text-align:right">后半部分</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>4 -3 5 -2</td>
+<td style="text-align:right">-1 2 6 -2</td>
+</tr>
+</tbody>
+</table>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">maxSubsequenceSum</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(left == right)&#123;</span><br><span class="line">		<span class="keyword">if</span>(a[left]&gt;<span class="number">0</span>)&#123;</span><br><span class="line">			<span class="keyword">return</span> a[left];</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> center = (left+right)/<span class="number">2</span>; </span><br><span class="line">	<span class="keyword">int</span> maxLeftSum = maxSubsequenceSum(a, left, center); <span class="comment">//递归调用，求左部分的最大和 </span></span><br><span class="line">	<span class="keyword">int</span> maxRightSum = maxSubsequenceSum(a, center+<span class="number">1</span>, right);<span class="comment">//递归调用，求右部分的最大和 </span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> leftBorderSum = <span class="number">0</span>, maxLeftBorderSum = <span class="number">0</span>;<span class="comment">//定义左边界子序列的和 </span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=center; i&gt;=left; i--)&#123;</span><br><span class="line">		leftBorderSum += a[i];</span><br><span class="line">		<span class="keyword">if</span>(leftBorderSum &gt; maxLeftBorderSum)&#123;</span><br><span class="line">			maxLeftBorderSum = leftBorderSum;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	 <span class="keyword">int</span> rightBorderSum = <span class="number">0</span>, maxRightBorderSum = <span class="number">0</span>;<span class="comment">//定义左边界子序列的和</span></span><br><span class="line">	 <span class="keyword">for</span>(<span class="keyword">int</span> i=center+<span class="number">1</span>; i&lt;=right; i++) &#123;</span><br><span class="line">		  rightBorderSum += a[i];</span><br><span class="line">		  <span class="keyword">if</span>(rightBorderSum &gt; maxRightBorderSum) &#123; </span><br><span class="line">			  maxRightBorderSum = rightBorderSum; </span><br><span class="line">			&#125;</span><br><span class="line">	&#125;</span><br><span class="line">		  </span><br><span class="line">     <span class="keyword">return</span> max3(maxLeftSum, maxRightSum, maxLeftBorderSum + maxRightBorderSum); <span class="comment">//选出这三者中的最大值并返回（max3(int a, int b, int c)的实现没有给出）</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>对这个算法进行分析：</p>
+<p>T(1) = 1<br>T(N) = 2T(N/2) + O(N)<br>最后得出算法的复杂度为：O(NlogN) 。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -258,7 +300,7 @@
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
  
- <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数学基础"><span class="toc-number">1.</span> <span class="toc-text">数学基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_定义"><span class="toc-number">1.1.</span> <span class="toc-text">1. 定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-_O(N)"><span class="toc-number">1.2.</span> <span class="toc-text">3. O(N)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-_Ω(N)"><span class="toc-number">1.3.</span> <span class="toc-text">4. Ω(N)</span></a></li></ol></li></ol>
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#数学基础"><span class="toc-number">1.</span> <span class="toc-text">数学基础</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_定义"><span class="toc-number">1.1.</span> <span class="toc-text">1. 定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-_O(N)"><span class="toc-number">1.2.</span> <span class="toc-text">3. O(N)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-_Ω(N)"><span class="toc-number">1.3.</span> <span class="toc-text">4. Ω(N)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#运行的时间"><span class="toc-number">2.</span> <span class="toc-text">运行的时间</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#一般法则"><span class="toc-number">2.1.</span> <span class="toc-text">一般法则</span></a></li></ol></li></ol>
  
   </div>
 
