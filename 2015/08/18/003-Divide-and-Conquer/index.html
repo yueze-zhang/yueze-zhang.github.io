@@ -1,0 +1,533 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>第三章 分治法 | GaRiboy</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    
+    <meta name="author" content="Yueze_Zhang">
+    
+
+    
+    <meta name="description" content="分治算法分治算法的基本思想是将一个规模为N的问题分解为K个规模较小的子问题，这些子问题相互独立且与原问题性质相同。求出子问题的解，就可得到原问题的解。
+分治法解题的一般步骤：
+
+分解，将要解决的问题划分成若干规模较小的同类问题；
+
+求解，当子问题划分得足够小时，用较简单的方法解决；
+
+合并，按原问题的要求，将子问题的解逐层合并构成原问题的解。
+
+
+一言以蔽之：分治法的设计思想是，将一个难以直接解决">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第三章 分治法">
+<meta property="og:url" content="http://yoursite.com/2015/08/18/003-Divide-and-Conquer/index.html">
+<meta property="og:site_name" content="GaRiboy">
+<meta property="og:description" content="分治算法分治算法的基本思想是将一个规模为N的问题分解为K个规模较小的子问题，这些子问题相互独立且与原问题性质相同。求出子问题的解，就可得到原问题的解。
+分治法解题的一般步骤：
+
+分解，将要解决的问题划分成若干规模较小的同类问题；
+
+求解，当子问题划分得足够小时，用较简单的方法解决；
+
+合并，按原问题的要求，将子问题的解逐层合并构成原问题的解。
+
+
+一言以蔽之：分治法的设计思想是，将一个难以直接解决">
+<meta property="og:image" content="http://files.jb51.net/file_images/article/201402/2014217152730566.gif">
+<meta property="og:updated_time" content="2015-08-18T13:23:16.664Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第三章 分治法">
+<meta name="twitter:description" content="分治算法分治算法的基本思想是将一个规模为N的问题分解为K个规模较小的子问题，这些子问题相互独立且与原问题性质相同。求出子问题的解，就可得到原问题的解。
+分治法解题的一般步骤：
+
+分解，将要解决的问题划分成若干规模较小的同类问题；
+
+求解，当子问题划分得足够小时，用较简单的方法解决；
+
+合并，按原问题的要求，将子问题的解逐层合并构成原问题的解。
+
+
+一言以蔽之：分治法的设计思想是，将一个难以直接解决">
+
+    
+    <link rel="alternative" href="/atom.xml" title="GaRiboy" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/jacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/jacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      
+<div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.png" alt="GaRiboy" title="GaRiboy"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="GaRiboy">GaRiboy</a></h1>
+				<h2 class="blog-motto">Walk step</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					<ul>
+					 
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+ 					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="search" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+  
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/08/18/003-Divide-and-Conquer/" title="第三章 分治法" itemprop="url">第三章 分治法</a>
+  </h1>
+  <p class="article-author">By
+       
+		<a href="/about" title="Yueze_Zhang" target="_blank" itemprop="author">Yueze_Zhang</a>
+		
+  <p class="article-time">
+    <time datetime="2015-08-18T13:18:09.000Z" itemprop="datePublished"> 发表于 2015-08-18</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		
+			<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#分治算法"><span class="toc-number">1.</span> <span class="toc-text">分治算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本思想："><span class="toc-number">1.1.</span> <span class="toc-text">基本思想：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#具体实现"><span class="toc-number">1.2.</span> <span class="toc-text">具体实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C语言代码"><span class="toc-number">1.3.</span> <span class="toc-text">C语言代码</span></a></li></ol></li></ol>
+		
+		</div>
+		
+		<h2 id="分治算法">分治算法</h2><p>分治算法的基本思想是将一个规模为N的问题分解为K个规模较小的子问题，这些子问题相互独立且与原问题性质相同。求出子问题的解，就可得到原问题的解。</p>
+<p>分治法解题的一般步骤：</p>
+<ol>
+<li><p>分解，将要解决的问题划分成若干规模较小的同类问题；</p>
+</li>
+<li><p>求解，当子问题划分得足够小时，用较简单的方法解决；</p>
+</li>
+<li><p>合并，按原问题的要求，将子问题的解逐层合并构成原问题的解。</p>
+</li>
+</ol>
+<p>一言以蔽之：分治法的设计思想是，将一个难以直接解决的大问题，分割成一些规模较小的相同问题，以便各个击破，分而治之。</p>
+<p>在认识分治之前很有必要先了解一下递归，当然，递归也是最基本的编程问题，一般接触过编程的人都会对递归有一些认识.为什么要先了解递归呢？你看，根据上面所说的，我们就要将一个问题分成若干个小问题，然后一一求解并且最后合并，这就是一个递归的问题，递归的去分解自身，递归的去解决每一个小问题，然后合并…</p>
+<p>关于递归,这里举一个最简单的例子，求N！；</p>
+<p>我们只需要定义函数</p>
+<p>复制代码 代码如下:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">calculate</span><span class="params">(<span class="keyword">int</span> n)</span></span><br><span class="line"></span><br><span class="line"></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(n==<span class="number">1</span>)</span><br><span class="line">	</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	</span><br><span class="line">		<span class="keyword">return</span> <span class="function">n*<span class="title">calculate</span><span class="params">(n-<span class="number">1</span>)</span></span>;   <span class="comment">//调用自身…</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>好了，有了递归的铺垫，我们下来来看一看一个分治算法的问题，归并排序问题…</p>
+<h3 id="基本思想：">基本思想：</h3><p>将待排序元素分成大小大致相同的2个子集合(递归直到最小的排序单元），分别对2个子集合进行排序，最终将排好序的子集合合并成为所要求的排好序的集合。</p>
+<p>下面我们用一张图来展示整个流程,最下面的（姑且叫他第一层）是原始数组分成了8个最小排序问题，各自只有一个元素，故不需要排序，大家可以看到，我们通过分而治之的思想把对最初数组的排序分为了若干个只有一个元素的小数组的排序,然后第二层,我们进行了合并，将每两个最小排序结果合并为有两个元素的数组,然后逐层往上进行合并，就有了最后的结果…、</p>
+<p><img src="http://files.jb51.net/file_images/article/201402/2014217152730566.gif" alt=""></p>
+<h3 id="具体实现">具体实现</h3><p>下面我们来看一下这个算法的具体实现，下面的MERGE-SORT (A, First,Last)表示对数组A[First-&gt;Last]的排序过程.其中First-&gt;Last代表从First到Last.<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">MERGE-SORT (A, First, Last)</span><br><span class="line"></span><br><span class="line">    IF First &lt; Last                                                    <span class="comment">// 进行A[First-&gt;Last]的排序过程自然需要First&lt;r的前提条件</span></span><br><span class="line"></span><br><span class="line">         THEN Mid = [(First + Last)/<span class="number">2</span>]                           <span class="comment">// 将当前的排序问题一分为二，分别进行处理</span></span><br><span class="line"></span><br><span class="line">              MERGE-SORT (A, First, Mid)                <span class="comment">//继续递归看能不能将问题继续一分为二，处理A[First-&gt;q]的排序</span></span><br><span class="line"></span><br><span class="line">              MERGE-SORT (A, First + <span class="number">1</span>, Last)          <span class="comment">// 继续递归看能不能将问题继续一分为二处理A[q+1-&gt;r]的排序</span></span><br><span class="line"></span><br><span class="line">	          MERGE (A, First, Mid, Last)                       <span class="comment">// 合并当前结果</span></span><br></pre></td></tr></table></figure></p>
+<p>到这里，分治算法的精髓已经出来了，我们通过递归将问题进行分解到足够小…继而进行结果计算…然后再将结果合并.</p>
+<p>下面来处理一下边角料的工作，呵呵，让大家看到一个完整的归并排序的例子，整个算法总结系列我都没有很好的使用伪代码，而是使用我认为广泛使用的C语言代码来进行代码诠释.实际上，描述算法最好还是使用伪代码比较好，这里我对我前面的四篇文章没有使用伪代码而小小的鄙视一下自己，太不专业了..呵呵</p>
+<p>首先考虑下如何将将二个有序数列合并。这个非常简单，只要从比较二个数列的第一个数，谁小就先取谁，取了后就在对应数列中删除这个数。然后再进行比较，如果有数列为空，那直接将另一个数列的数据依次取出即可。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//将有序数组a[]和b[]合并到c[]中  </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MemeryArray</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> n, <span class="keyword">int</span> b[], <span class="keyword">int</span> m, <span class="keyword">int</span> c[])</span>  </span><br><span class="line"></span>&#123;  </span><br><span class="line">    <span class="keyword">int</span> i, j, k;  </span><br><span class="line">  </span><br><span class="line">    i = j = k = <span class="number">0</span>;  </span><br><span class="line">    <span class="keyword">while</span> (i &lt; n &amp;&amp; j &lt; m)  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="keyword">if</span> (a[i] &lt; b[j])  </span><br><span class="line">            c[k++] = a[i++];  </span><br><span class="line">        <span class="keyword">else</span>  </span><br><span class="line">            c[k++] = b[j++];   </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">while</span> (i &lt; n)  </span><br><span class="line">        c[k++] = a[i++];  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">while</span> (j &lt; m)  </span><br><span class="line">        c[k++] = b[j++];  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>让我们把这两种程序融合一下</p>
+<h3 id="C语言代码">C语言代码</h3><p>关于代码注释，请见博客上面的伪代码注释..</p>
+<p>复制代码 代码如下:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="keyword">int</span> L[<span class="number">100</span>],R[<span class="number">100</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> numbers[],<span class="keyword">int</span> left, <span class="keyword">int</span> mid, <span class="keyword">int</span> right)</span></span><br><span class="line">        </span>&#123;</span><br><span class="line">            <span class="keyword">int</span> n1=mid-left+<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">int</span> n2=right-mid;</span><br><span class="line">            <span class="keyword">int</span> i,j,k;</span><br><span class="line">            <span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n1;i++)</span><br><span class="line">             L[i]=numbers[left+i-<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">for</span>( j=<span class="number">1</span>;j&lt;=n2;j++)</span><br><span class="line">             R[j]=numbers[mid+j];</span><br><span class="line">            </span><br><span class="line"></span><br><span class="line">            i=<span class="number">1</span>;</span><br><span class="line">            j=<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span>(k=left;k&lt;=right;k++)</span><br><span class="line">            <span class="keyword">if</span>(L[i]&lt;=R[j])</span><br><span class="line">               &#123;</span><br><span class="line">                   numbers[k]=L[i];</span><br><span class="line">                   i++;</span><br><span class="line">                   &#125;</span><br><span class="line">                 <span class="keyword">else</span></span><br><span class="line">                  &#123;</span><br><span class="line">                       numbers[k]=R[j];</span><br><span class="line">                       j++;</span><br><span class="line">                  &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mergeSort</span><span class="params">(<span class="keyword">int</span> numbers[],<span class="keyword">int</span> left, <span class="keyword">int</span> right)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(left&lt;right)</span><br><span class="line">    &#123;</span><br><span class="line">                <span class="keyword">int</span> mid;</span><br><span class="line">            mid = (right + left) / <span class="number">2</span>;</span><br><span class="line">            mergeSort(numbers, left, mid);</span><br><span class="line">            mergeSort(numbers, mid+<span class="number">1</span>, right);</span><br><span class="line">            merge(numbers,left, mid, right);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> numbers[]=&#123;<span class="number">5</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">6</span>&#125;;</span><br><span class="line">    mergeSort(numbers,<span class="number">0</span>,<span class="number">7</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">8</span>;i++)</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>,numbers[i]);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
+<p>归并排序算法的时间复杂度是O（nlogn）,对于冒泡排序的O(n*n),效率还有有比较好的提高..</p>
+<p>其实本人原来在学习的时候好长一段时间不理解为什么时间复杂度会是O（nlogn）,像冒泡排序就比较好理解，有两个for循环，问题的规模随着n变大而变大，算法时间复杂度自然就是O(n*n),后面花了一些时间来阅读一些资料才明白其原理，这里我已经将资料地址放到了本文最后，有兴趣的也可以去看看.简单的描述一下为什么会是O（nlogn）</p>
+<p>大家看看，我们的例子，解一个8个元素的数组，我们用到了几层？是四层，假设我们这里有n个元素，我们会用到多少层？根据一定的归纳总结，我们知道我们会用到(lgn)+1层..(lgn)+1层需要用到lgn层次的合并算法.现在再看看MERGE (A, p, q, r )的复杂度是多少，毫无疑问O（n），故其归并排序的算法时间复杂度是O（nlogn）.当然这个结果还可以通过其他的方法计算出来，我这里是口语话最简洁的一种..</p>
+  
+	</div>
+		<footer class="article-footer clearfix">
+<div class="article-catetags">
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/数据结构与算法/">数据结构与算法</a>
+</div>
+
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/博客，文章/">博客，文章</a>
+  </div>
+
+</div>
+
+
+
+	<div class="article-share" id="share">
+	
+	  <div data-url="http://yoursite.com/2015/08/18/003-Divide-and-Conquer/" data-title="第三章 分治法 | GaRiboy" data-tsina="null" class="share clearfix">
+	  </div>
+	
+	</div>
+
+
+</footer>
+
+   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/08/17/2/"  title="第二章，算法分析">
+ <strong>下一篇：</strong><br/> 
+ <span>第二章，算法分析
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+ 
+ <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#分治算法"><span class="toc-number">1.</span> <span class="toc-text">分治算法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#基本思想："><span class="toc-number">1.1.</span> <span class="toc-text">基本思想：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#具体实现"><span class="toc-number">1.2.</span> <span class="toc-text">具体实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C语言代码"><span class="toc-number">1.3.</span> <span class="toc-text">C语言代码</span></a></li></ol></li></ol>
+ 
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+		  
+			<li><a href="/categories/数据结构与算法/" title="数据结构与算法">数据结构与算法<sup>3</sup></a></li>
+		  
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			
+				<li><a href="/tags/博客，文章/" title="博客，文章">博客，文章<sup>3</sup></a></li>
+			
+		
+		</ul>
+</div>
+
+
+  <div class="linkslist">
+  <p class="asidetitle">友情链接</p>
+    <ul>
+        
+          <li>
+            
+            	<a href="https://coderq.com" target="_blank" title="一个面向程序员交流分享的新一代社区">码农圈</a>
+            
+          </li>
+        
+          <li>
+            
+            	<a href="http://wuchong.me" target="_blank" title="Jark&#39;s Blog">Jark&#39;s Blog</a>
+            
+          </li>
+        
+    </ul>
+</div>
+
+  
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<section class="info">
+		<p> Hello ,I&#39;m Larry Page in Google. <br/>
+			This is my blog,believe it or not.</p>
+	</section>
+	 
+	<div class="social-font" class="clearfix">
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</div>
+			
+		
+
+		<p class="copyright">
+		Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/wuchong/jacman" target="_blank" title="Jacman">Jacman</a> © 2015 
+		
+		<a href="/about" target="_blank" title="Yueze_Zhang">Yueze_Zhang</a>
+		
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.0.3.min.js"></script>
+<script src="/js/jquery.imagesloaded.min.js"></script>
+<script src="/js/gallery.js"></script>
+<script src="/js/jquery.qrcode-0.12.0.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+  
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else{
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  c.click(function(){
+    ta.css('display', 'block').addClass('fadeIn');
+  });
+  o.click(function(){
+    ta.css('display', 'none');
+  });
+  $(window).scroll(function(){
+    ta.css("top",Math.max(140,320-$(this).scrollTop()));
+  });
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina'),
+      description = $this.attr('description');
+  var html = [
+  '<div class="hoverqrcode clearfix"></div>',
+  '<a class="overlay" id="qrcode"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="微信"></a>',
+  '<a href="http://widget.renren.com/dialog/share?resourceUrl=' + encodedUrl + '&srcUrl=' + encodedUrl + '&title=' + title +'" class="article-share-renren" target="_blank" title="人人"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="微博"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+
+  $('.hoverqrcode').hide();
+
+  var myWidth = 0;
+  function updatehoverqrcode(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+    var qrsize = myWidth > 1024 ? 200:100;
+    var options = {render: 'image', size: qrsize, fill: '#2ca6cb', text: url, radius: 0.5, quiet: 1};
+    var p = $('.article-share-qrcode').position();
+    $('.hoverqrcode').empty().css('width', qrsize).css('height', qrsize)
+                          .css('left', p.left-qrsize/2+20).css('top', p.top-qrsize-10)
+                          .qrcode(options);
+  };
+  $(window).resize(function(){
+    $('.hoverqrcode').hide();
+  });
+  $('.article-share-qrcode').click(function(){
+    updatehoverqrcode();
+    $('.hoverqrcode').toggle();
+  });
+  $('.article-share-qrcode').hover(function(){}, function(){
+      $('.hoverqrcode').hide();
+  });
+});   
+</script>
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+
+<!-- Analytics Begin -->
+
+
+
+
+
+<!-- Analytics End -->
+
+<!-- Totop Begin -->
+
+	<div id="totop">
+	<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+	</div>
+	<script src="/js/totop.js"></script>
+
+<!-- Totop End -->
+
+<!-- MathJax Begin -->
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+<!-- MathJax End -->
+
+<!-- Tiny_search Begin -->
+
+<!-- Tiny_search End -->
+
+  </body>
+</html>
