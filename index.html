@@ -30,16 +30,16 @@
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
 			
-			<img lazy-src="url=http://i3.tietuku.com/d441d367d73af2a9.jpg" class="js-avatar">
+			<img lazy-src="http://i3.tietuku.com/d441d367d73af2a9.jpg" class="js-avatar">
 			
 		</a>
 
 		<hgroup>
-		  <h1 class="header-author"><a href="/">Yueze_Zhang</a></h1>
+		  <h1 class="header-author"><a href="/">GaRiboy</a></h1>
 		</hgroup>
 
 		
-		<p class="header-subtitle">Walk step</p>
+		<p class="header-subtitle">一个小瘦孩爱上一个小胖墩儿～</p>
 		
 
 		
@@ -155,18 +155,18 @@
       <nav id="mobile-nav">
   	<div class="overlay">
   		<div class="slider-trigger"></div>
-  		<h1 class="header-author js-mobile-header hide">Yueze_Zhang</h1>
+  		<h1 class="header-author js-mobile-header hide">GaRiboy</h1>
   	</div>
 	<div class="intrude-less">
 		<header id="header" class="inner">
 			<div class="profilepic">
-				<img lazy-src="url=http://i3.tietuku.com/d441d367d73af2a9.jpg" class="js-avatar">
+				<img lazy-src="http://i3.tietuku.com/d441d367d73af2a9.jpg" class="js-avatar">
 			</div>
 			<hgroup>
-			  <h1 class="header-author">Yueze_Zhang</h1>
+			  <h1 class="header-author">GaRiboy</h1>
 			</hgroup>
 			
-			<p class="header-subtitle">Walk step</p>
+			<p class="header-subtitle">一个小瘦孩爱上一个小胖墩儿～</p>
 			
 			<nav class="header-menu">
 				<ul>
@@ -223,35 +223,6 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="分治算法">分治算法</h2><p>分治算法的基本思想是将一个规模为N的问题分解为K个规模较小的子问题，这些子问题相互独立且与原问题性质相同。求出子问题的解，就可得到原问题的解。</p>
-<p>分治法解题的一般步骤：</p>
-<ol>
-<li><p>分解，将要解决的问题划分成若干规模较小的同类问题；</p>
-</li>
-<li><p>求解，当子问题划分得足够小时，用较简单的方法解决；</p>
-</li>
-<li><p>合并，按原问题的要求，将子问题的解逐层合并构成原问题的解。</p>
-</li>
-</ol>
-<p>一言以蔽之：分治法的设计思想是，将一个难以直接解决的大问题，分割成一些规模较小的相同问题，以便各个击破，分而治之。</p>
-<p>在认识分治之前很有必要先了解一下递归，当然，递归也是最基本的编程问题，一般接触过编程的人都会对递归有一些认识.为什么要先了解递归呢？你看，根据上面所说的，我们就要将一个问题分成若干个小问题，然后一一求解并且最后合并，这就是一个递归的问题，递归的去分解自身，递归的去解决每一个小问题，然后合并…</p>
-<p>关于递归,这里举一个最简单的例子，求N！；</p>
-<p>我们只需要定义函数</p>
-<p>复制代码 代码如下:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">calculate</span><span class="params">(<span class="keyword">int</span> n)</span></span><br><span class="line"></span><br><span class="line"></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span>(n==<span class="number">1</span>)</span><br><span class="line">	</span><br><span class="line">		<span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">	</span><br><span class="line">		<span class="keyword">return</span> <span class="function">n*<span class="title">calculate</span><span class="params">(n-<span class="number">1</span>)</span></span>;   <span class="comment">//调用自身…</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>好了，有了递归的铺垫，我们下来来看一看一个分治算法的问题，归并排序问题…</p>
-<h3 id="基本思想：">基本思想：</h3><p>将待排序元素分成大小大致相同的2个子集合(递归直到最小的排序单元），分别对2个子集合进行排序，最终将排好序的子集合合并成为所要求的排好序的集合。</p>
-<p>下面我们用一张图来展示整个流程,最下面的（姑且叫他第一层）是原始数组分成了8个最小排序问题，各自只有一个元素，故不需要排序，大家可以看到，我们通过分而治之的思想把对最初数组的排序分为了若干个只有一个元素的小数组的排序,然后第二层,我们进行了合并，将每两个最小排序结果合并为有两个元素的数组,然后逐层往上进行合并，就有了最后的结果…、</p>
-<p><img src="http://files.jb51.net/file_images/article/201402/2014217152730566.gif" alt=""></p>
-<h3 id="具体实现">具体实现</h3><p>下面我们来看一下这个算法的具体实现，下面的MERGE-SORT (A, First,Last)表示对数组A[First-&gt;Last]的排序过程.其中First-&gt;Last代表从First到Last.<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">MERGE-SORT (A, First, Last)</span><br><span class="line"></span><br><span class="line">    IF First &lt; Last                                                    <span class="comment">// 进行A[First-&gt;Last]的排序过程自然需要First&lt;r的前提条件</span></span><br><span class="line"></span><br><span class="line">         THEN Mid = [(First + Last)/<span class="number">2</span>]                           <span class="comment">// 将当前的排序问题一分为二，分别进行处理</span></span><br><span class="line"></span><br><span class="line">              MERGE-SORT (A, First, Mid)                <span class="comment">//继续递归看能不能将问题继续一分为二，处理A[First-&gt;q]的排序</span></span><br><span class="line"></span><br><span class="line">              MERGE-SORT (A, First + <span class="number">1</span>, Last)          <span class="comment">// 继续递归看能不能将问题继续一分为二处理A[q+1-&gt;r]的排序</span></span><br><span class="line"></span><br><span class="line">	          MERGE (A, First, Mid, Last)                       <span class="comment">// 合并当前结果</span></span><br></pre></td></tr></table></figure></p>
-<p>到这里，分治算法的精髓已经出来了，我们通过递归将问题进行分解到足够小…继而进行结果计算…然后再将结果合并.</p>
-<p>下面来处理一下边角料的工作，呵呵，让大家看到一个完整的归并排序的例子，整个算法总结系列我都没有很好的使用伪代码，而是使用我认为广泛使用的C语言代码来进行代码诠释.实际上，描述算法最好还是使用伪代码比较好，这里我对我前面的四篇文章没有使用伪代码而小小的鄙视一下自己，太不专业了..呵呵</p>
-<p>首先考虑下如何将将二个有序数列合并。这个非常简单，只要从比较二个数列的第一个数，谁小就先取谁，取了后就在对应数列中删除这个数。然后再进行比较，如果有数列为空，那直接将另一个数列的数据依次取出即可。<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//将有序数组a[]和b[]合并到c[]中  </span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MemeryArray</span><span class="params">(<span class="keyword">int</span> a[], <span class="keyword">int</span> n, <span class="keyword">int</span> b[], <span class="keyword">int</span> m, <span class="keyword">int</span> c[])</span>  </span><br><span class="line"></span>&#123;  </span><br><span class="line">    <span class="keyword">int</span> i, j, k;  </span><br><span class="line">  </span><br><span class="line">    i = j = k = <span class="number">0</span>;  </span><br><span class="line">    <span class="keyword">while</span> (i &lt; n &amp;&amp; j &lt; m)  </span><br><span class="line">    &#123;  </span><br><span class="line">        <span class="keyword">if</span> (a[i] &lt; b[j])  </span><br><span class="line">            c[k++] = a[i++];  </span><br><span class="line">        <span class="keyword">else</span>  </span><br><span class="line">            c[k++] = b[j++];   </span><br><span class="line">    &#125;  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">while</span> (i &lt; n)  </span><br><span class="line">        c[k++] = a[i++];  </span><br><span class="line">  </span><br><span class="line">    <span class="keyword">while</span> (j &lt; m)  </span><br><span class="line">        c[k++] = b[j++];  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>让我们把这两种程序融合一下</p>
-<h3 id="C语言代码">C语言代码</h3><p>关于代码注释，请见博客上面的伪代码注释..</p>
-<p>复制代码 代码如下:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="keyword">int</span> L[<span class="number">100</span>],R[<span class="number">100</span>];</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge</span><span class="params">(<span class="keyword">int</span> numbers[],<span class="keyword">int</span> left, <span class="keyword">int</span> mid, <span class="keyword">int</span> right)</span></span><br><span class="line">        </span>&#123;</span><br><span class="line">            <span class="keyword">int</span> n1=mid-left+<span class="number">1</span>;</span><br><span class="line">            <span class="keyword">int</span> n2=right-mid;</span><br><span class="line">            <span class="keyword">int</span> i,j,k;</span><br><span class="line">            <span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n1;i++)</span><br><span class="line">             L[i]=numbers[left+i-<span class="number">1</span>];</span><br><span class="line">            <span class="keyword">for</span>( j=<span class="number">1</span>;j&lt;=n2;j++)</span><br><span class="line">             R[j]=numbers[mid+j];</span><br><span class="line">            </span><br><span class="line"></span><br><span class="line">            i=<span class="number">1</span>;</span><br><span class="line">            j=<span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span>(k=left;k&lt;=right;k++)</span><br><span class="line">            <span class="keyword">if</span>(L[i]&lt;=R[j])</span><br><span class="line">               &#123;</span><br><span class="line">                   numbers[k]=L[i];</span><br><span class="line">                   i++;</span><br><span class="line">                   &#125;</span><br><span class="line">                 <span class="keyword">else</span></span><br><span class="line">                  &#123;</span><br><span class="line">                       numbers[k]=R[j];</span><br><span class="line">                       j++;</span><br><span class="line">                  &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">mergeSort</span><span class="params">(<span class="keyword">int</span> numbers[],<span class="keyword">int</span> left, <span class="keyword">int</span> right)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(left&lt;right)</span><br><span class="line">    &#123;</span><br><span class="line">                <span class="keyword">int</span> mid;</span><br><span class="line">            mid = (right + left) / <span class="number">2</span>;</span><br><span class="line">            mergeSort(numbers, left, mid);</span><br><span class="line">            mergeSort(numbers, mid+<span class="number">1</span>, right);</span><br><span class="line">            merge(numbers,left, mid, right);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> numbers[]=&#123;<span class="number">5</span>,<span class="number">2</span>,<span class="number">4</span>,<span class="number">6</span>,<span class="number">1</span>,<span class="number">3</span>,<span class="number">2</span>,<span class="number">6</span>&#125;;</span><br><span class="line">    mergeSort(numbers,<span class="number">0</span>,<span class="number">7</span>);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>;i&lt;<span class="number">8</span>;i++)</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d"</span>,numbers[i]);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure></p>
-<p>归并排序算法的时间复杂度是O（nlogn）,对于冒泡排序的O(n*n),效率还有有比较好的提高..</p>
-<p>其实本人原来在学习的时候好长一段时间不理解为什么时间复杂度会是O（nlogn）,像冒泡排序就比较好理解，有两个for循环，问题的规模随着n变大而变大，算法时间复杂度自然就是O(n*n),后面花了一些时间来阅读一些资料才明白其原理，这里我已经将资料地址放到了本文最后，有兴趣的也可以去看看.简单的描述一下为什么会是O（nlogn）</p>
-<p>大家看看，我们的例子，解一个8个元素的数组，我们用到了几层？是四层，假设我们这里有n个元素，我们会用到多少层？根据一定的归纳总结，我们知道我们会用到(lgn)+1层..(lgn)+1层需要用到lgn层次的合并算法.现在再看看MERGE (A, p, q, r )的复杂度是多少，毫无疑问O（n），故其归并排序的算法时间复杂度是O（nlogn）.当然这个结果还可以通过其他的方法计算出来，我这里是口语话最简洁的一种..</p>
-
       
     </div>
     
@@ -268,6 +239,10 @@
 	</div>
 
 
+      
+        <p class="article-more-link">
+          <a  href="/2015/08/18/003-Divide-and-Conquer/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -316,113 +291,6 @@
 <li>粗心的使用递归的后果。</li>
 <li>将一个数自乘得到其幂以及计算两个数的最大公约数的非常有效的算法。</li>
 </ul>
-<h2 id="数学基础">数学基础</h2><h3 id="1-_定义">1. 定义</h3><p>我们将使用下面四个定义：</p>
-<blockquote>
-<ol>
-<li>如果存在正常数<em>c</em>和<em>n0</em>使得当<em>N &gt;= n0</em>时<em>T(N) =&lt; cf(N)</em>, 则记为<em>T(N) = O(f(N))</em></li>
-<li>如果存在正常数<em>c</em>和<em>n0</em>使得当<em>N &gt;= n0</em>时<em>T(N) &gt;= cg(N)</em>, 则记为<em>T(N) = Omega(f(N))</em></li>
-<li><em>T(N) = (h(N))</em>当且仅当<em>T(N) = O(h(N))</em>和<em>T(N) = (h(N))</em></li>
-<li>如果对所有的常数<em>c</em>存在<em>n0</em>使得当<em>N &gt; n0</em>时<em>T(N)&lt; cp(N)</em>,则记为<em>T(N) = o(P(N))</em></li>
-</ol>
-</blockquote>
-<p>这些定义的目的是要在函数之间建立一种相对应的级别。我们将比较它们的相对增长率(relative rate of growth)</p>
-<p>我们来看这四个定义：<br>当N较小的时候，1000N是要大于N^2的，但N^2的增长率则更快，所以总有一个数n0，使得N^2 &gt; 1000N, 在我们的例子中，T(N) = 1000N, f(N) = N^2.</p>
-<p>如果我们用传统的不等式来比较增长率，<br>第一个定义就是说T(N)的增长率小于等于f(N)的增长率，<br>第二个定义T（N）= Omega(g(N))就是说T(N)的增长率大于等于g(N)的增长率<br>第三个定义T(N) = (h(N))是说T(N)的增长率等于h(N)的增长率。<br>第四个定义T(N) = o(P(N))是说T(N)的增长率小于P(N)的增长率，它不同于O，因为O</p>
-<p>我们举一个例子，一组数从a1到an，然后按照需求进行排序，排序后每个数字只出现一次，使得a1’&lt; a2’&lt; a3’……。我们先用插值排序来计算它的所需时间<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InsertSort</span> <span class="params">(<span class="keyword">int</span> *arr, <span class="keyword">int</span> size)</span>  </span><br><span class="line"></span>&#123;  </span><br><span class="line">    <span class="keyword">int</span> fOut, loc, temp;  </span><br><span class="line">    <span class="keyword">for</span> (fOut = <span class="number">1</span>;fOut &lt; size; fOut++)  </span><br><span class="line">        <span class="keyword">if</span>(arr[fOut] &lt; arr[fOut-<span class="number">1</span>])  </span><br><span class="line">        &#123;  </span><br><span class="line">            temp = arr[fOut];  </span><br><span class="line">            loc = fOut;  </span><br><span class="line">            <span class="keyword">do</span>  </span><br><span class="line">            &#123;  </span><br><span class="line">                arr[loc] = arr[loc - <span class="number">1</span>];  </span><br><span class="line">                loc--;  </span><br><span class="line">            &#125;<span class="keyword">while</span>(loc &gt; <span class="number">0</span> &amp;&amp; arr[loc - <span class="number">1</span>] &gt; temp);  </span><br><span class="line">            arr[loc] = temp;  </span><br><span class="line">        &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>假设给定数组：8，2，4，9，3，6<br>则第一次排序：2，8，4，9，3，6<br>则第二次排序：2，4，8，9，3，6<br>则第三次排序：2，4，8，9，3，6<br>则第四次排序：2，3，4，8，9，6<br>则第四次排序：2，3，4，6，8，9</p>
-<p>一般来说我们想知道算法运行时间的<strong>上限</strong>,这样方便用户进行更好的操作。算法的运行时间取决于好多因素，其中一个因素是输入本身，另一个因素是数据规模。通常我们处理输入的方式是将输入参数化，我们会把运行时间看作对待排列数据规模的。</p>
-<p>所以我们<strong>T(n)</strong>定义为输入规模为<strong>n</strong>时的最长运行时间。<br>『<em>我们有时候也讨论程序所需要的平均时间，这里T(n)就成了输入规模n之下所有可能输入的期望时间，什么是期望时间呢？每种输入运行的时间乘以那种输入出现的概率就是期望时间。</em>』</p>
-<p>算法运行时间的上限还取决于计算机的运行速度。所以当我们比较算法时，我们比较的是算法间的相对速度。<strong>忽略掉那些依赖于机器的常量，不去检验实际运行时间，而关注运行时间的增长。</strong></p>
-<p>所以说在不同的机器上跑同样的算法，最长情况时间总是不一样的，我们得想方设法去除机器性能的影响，而只是去单单分析算法本身的优劣，以便于在具体量化算法性能的时候又能去除机器因素的影响，因为我们讲算法分析而不是计算机系统分析。于是有人发明了Θ符号。对于这个符号我们来看几个例子，再看定义</p>
-<p>###2. Θ(N)<br>Θ符号掌握起来很简单，你要做的就是写个公式，抛<strong>弃他的低阶项，忽略前面的常数因子。</strong><br>例如：如果公式为 $$a <em> x ^2 + b </em> x + c = f(x)$$</p>
-<p>那么有<br> $$Θ（x^2）= f(x)$$</p>
-<p>如果n趋向于无穷大的时候，总会有<br> $$thea（x) &lt; thea（x^2)$$</p>
-<p>也就是说它相当于取出f(x)的最高次项然后去掉其常数因子，然后放入Θ（）中，而放入Θ（）中又表示了什么呢？为了弄清楚这个问题，我们来看其定义：</p>
-<blockquote>
-<p>Θ(g(n)) = f(n) : 存在某个常数 c1, c2, 和n0，使得当 n &gt; = n0时，有 0 &lt; = c1 <em> g(n) &lt; = f(n) &lt; = c2 </em> g(n)</p>
-</blockquote>
-<p>从后面半句开始，</p>
-<blockquote>
-<p>存在 n &gt; n0, 0 &lt; = c1 * g(n)</p>
-</blockquote>
-<p>这里保证了g(n)是一个<strong>增函数</strong>。接着有 </p>
-<p>$$c1 <em> g(n) &lt;=  f(n)  &lt;= c2 </em> g(n)$$</p>
-<p>在脑海里可以想象出来函数图像 [ c1 <em> g(n),c2 </em> g(n) ]这个区间实际上是摇摆的曲线.如果把g(n)看做是y = x这样的正比例函数，就是一个扇形是吧？一根曲线摇摆着，扫出一个扇形来。而f(n)就是这组成扇形的众多曲线中的一根！这里也就是说，无论g(n)是什么，总能有一个常数因子使得<br>$$c1 * f(n) =g(n).$$<br>再返回来原来的题目中去理解：</p>
-<p>$$a <em> x ^2 + b </em> x + c = f(x)$$</p>
-<p>那么有<br>$$Θ（x^2）= f(x)$$</p>
-<p>这里Θ（x^2）表示，在x趋于无穷大这个过程中，有一个常数c使得<br>$$c <em> n^2 = a </em> x ^2 + b <em> x +c = f(x)$$也就是：<em>*同!阶!数!(见高数上)</em></em>.</p>
-<p>这样，我们用Θ（）来描述先程序的性能 n^2 + n 变成了Θ（n ^ 2）,这里表明:</p>
-<p>在n趋于无穷大的过程中，总有一个常数因子使得<br>$$c * n^2 = n ^2 + n$$</p>
-<p>这个常数因子c在上文中说到，由机器和其它非算法因素来决定。也就是说，我们用Θ（n ^ 2）来表示一个算法的性能的时候，我们就完全忽略了机器，只研究算法本身，它好像是说：无论你在什么机器上跑这个算法，只要输入规模足够大，你的性能都是n ^ 2的整数倍，至于是多少倍，由机器决定的，反正在同样的机器上，这个倍数是相等了。</p>
-<p>回到插值排序计算最坏情况时间：</p>
-<p>对于每一个J的取值，循环会做多少次操作呢? 在渐近上，这等于j乘上某个常数，所以应该是Θ(j)<br>看看循环次数计算一下时间 $$T(n)=\sum_{j=1}^nΘ(j) = Θ(n^2)$$<br>（因为（求和：fOut从1到size）就等于1+2+3+……算数级数求和）<br>插值排序对于n很小的时候很快，但对于n很大的时候就时间很长了。</p>
-<p>然后我们引入一种新的排序方式与其做对比——<strong>归并排序</strong></p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;time.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Merge</span><span class="params">(<span class="keyword">int</span> *R,<span class="keyword">int</span> low,<span class="keyword">int</span> m,<span class="keyword">int</span> high)</span></span>;    <span class="comment">// 这个函数用来将两个排好序的数组进行合并</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MergeSort</span><span class="params">(<span class="keyword">int</span> R[],<span class="keyword">int</span> low,<span class="keyword">int</span> high)</span></span>;    <span class="comment">//这个函数用来将问题细分</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    <span class="keyword">int</span> a[<span class="number">10</span>];</span><br><span class="line">    <span class="keyword">int</span> low = <span class="number">0</span>,high = <span class="number">9</span>;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"请输入10个正整数:\n"</span>);</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        rescan:</span><br><span class="line">        <span class="keyword">if</span>(<span class="built_in">scanf</span>(<span class="string">"%d"</span>, &amp;a[i]) != <span class="number">1</span>) </span><br><span class="line">	    &#123;</span><br><span class="line">	        fflush(<span class="built_in">stdin</span>);</span><br><span class="line">	        <span class="built_in">printf</span>(<span class="string">"非法输入!\n"</span>);</span><br><span class="line">	        <span class="keyword">goto</span> rescan;</span><br><span class="line">	    &#125;</span><br><span class="line">	 <span class="comment">//输入10个数，并判断是否为正整数</span></span><br><span class="line">    &#125;</span><br><span class="line">    MergeSort(a,low,high);</span><br><span class="line">    <span class="keyword">for</span>(i = low;i &lt;= high;i++)</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"%d "</span>,a[i]);</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Merge</span><span class="params">(<span class="keyword">int</span> *R,<span class="keyword">int</span> low,<span class="keyword">int</span> m,<span class="keyword">int</span> high)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = low,j = m + <span class="number">1</span>,p = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">int</span> *R1;          <span class="comment">// 动态分配内存,分给左右2个数组m和high(他这里倒不如用Left和Right更清楚)</span></span><br><span class="line">    R1=(<span class="keyword">int</span> *)<span class="built_in">malloc</span>((high - low + <span class="number">1</span>) *<span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line">    <span class="keyword">if</span> (!R1) <span class="keyword">return</span>; <span class="comment">//只要有一个数组到达了尾部就要跳出</span></span><br><span class="line"><span class="comment">// 进行合并</span></span><br><span class="line"></span><br><span class="line">	</span><br><span class="line">    <span class="keyword">while</span>(i &lt;= m &amp;&amp; j &lt;= high) </span><br><span class="line">        R1[p++] = (R[i] &lt;= R[j]) ? R[i++] : R[j++];    <span class="comment">// 把较小的那个数据放到结果数组里， 同时移动指针</span></span><br><span class="line">    <span class="keyword">while</span>(i&lt;=m) </span><br><span class="line">        R1[p++]=R[i++];    <span class="comment">//如果 m 还有元素，把剩下的数据直接放到结果数组</span></span><br><span class="line">    <span class="keyword">while</span>(j&lt;=high) </span><br><span class="line">        R1[p++]=R[j++];    <span class="comment">//如果 high 还有元素，把剩下的数据直接放到结果数组</span></span><br><span class="line">    <span class="keyword">for</span>(p=<span class="number">0</span>,i=low;i&lt;=high;p++,i++)</span><br><span class="line">        R[i]=R1[p];        <span class="comment">//把结果数组 复制 到 数组R 里</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">MergeSort</span><span class="params">(<span class="keyword">int</span> R[],<span class="keyword">int</span> low,<span class="keyword">int</span> high)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">     <span class="keyword">int</span> mid;</span><br><span class="line">     <span class="keyword">if</span>(low&lt;high)</span><br><span class="line">     &#123; </span><br><span class="line">    	 <span class="comment">// 归并的基本思想</span></span><br><span class="line">    	 mid=(low+high)/<span class="number">2</span>;</span><br><span class="line">    	 MergeSort(R,low,mid);<span class="comment">// 排左边</span></span><br><span class="line">    	 MergeSort(R,mid+<span class="number">1</span>,high);<span class="comment">// 排右边</span></span><br><span class="line">    	 Merge(R,low,mid,high);<span class="comment">// 合并</span></span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>归并排序我们做的就是递归地对A[1到n/2]这部分，以及A[n/2+1到n]这部分排序。<br>所以我们的输入是分为两部分的。第三步，我们把排序好的两个表归并，对于归并排序，每一步我们只需要关注两组数中元素大小，<br>所以对于总数为N的输入，时间是：$$T(n)=2T(n/2)+Θ(n)=Θ(n*lgn)$$  </p>
-<p>你看，Θ（(n*lgn）表示的不就是机器无关的，纯算法的性能了吗？原来的问题解决了。</p>
-<p>不过Θ（(n*lgn）符号还使得我们只关注最高次幂，不去关注低次项，因为在n-&gt;无穷大的时候，低次项是没有意义的，因为此时只要n变化一点点，就足以抵消低次项的变化（其实还是同阶数）。</p>
-<p>这两种算法Θ（）并不相同，代表他们最坏情况所需时间也并不一样</p>
-<p>所以我们知道，对于一个时间复杂度为Θ（(n<em>lgn）的算法，它的时间性能是优于Θ（n^2）的算法的，这里我们没有考虑常数因子，即使Θ（n</em>lgn）的常数因子是10000000000000而Θ（n^2）的常数因子是1也没有关系，因为无论如何，总有一个值n0使得n越过这个点之后Θ（n<em>lgn）的算法总能打败Θ（n^2）的算法，也就是说使用了Θ这类的符号（渐进符号）去比较算法时间性能的时候，是与机器无关的，即使你在超级计算机上跑Θ（n^2）算法，只要输入规模和时间足够，跑Θ（n</em>lgn）算法的老式386机子总能打败超级计算机。</p>
-<p>类似于Θ符号我们引出了O符号（读作大o）。</p>
-<h3 id="3-_O(N)">3. O(N)</h3><blockquote>
-<p>O（g(n)） = {f(n) : 存在某个常数c,和n0，使得当n &gt;= n0 时，有 0 &lt;= f(n) &lt;= c *g(n) </p>
-</blockquote>
-<p>这里我们就只关心最坏情况，我们在谈论一个算法的最坏情况时间复杂度的时候总是喜欢使用O符号，我通过前面的例子来说明这个O符号的作用。</p>
-<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">For<span class="comment">(I = 0,I &lt; n ; I ++)</span></span><br><span class="line"></span><br><span class="line">       For<span class="comment">(J = 0; j &lt; n ; j++)</span>;</span><br><span class="line"></span><br><span class="line">For <span class="comment">(cnt = 0; cnt &lt; n ; cnt ++)</span>;</span><br></pre></td></tr></table></figure>
-<p>这时候我们把机器执行的速度看做单位1，于是执行的时间是n^2 + n，我们会说，上面这个算法最坏情况时间复杂度是O(n^2)。</p>
-<p>还是同样的目的，我们不去考虑机器本身的影响，因为机器执行的速度如果是c，那么时间也就是变成了(n^2 + n) / c,也只是常数因子的问题而已。在输入规模足够大的情况下，我们用O（n^ 2）来忽略机器的影响，只考虑算法本身的最坏情况，告诉别人： 嘿！无论你在什么机器上跑，你的最坏情况都不能比n ^ 2 这个值的x倍更坏啦。至于X倍是多少倍，反正我们只是研究算法的，只有做机器的人才知道X是多少倍，而我们比较算法的时候，不会在不同的机器上去测同样的算法然后拿来比较，往往在同样的机器上去考察一个算法，这时常数因子X是相等的，关心它也是多余的了。</p>
-<p>这就好比我们高考的时候每个人的分数都乘以10分然后再来报考，结果还不是一样？因为考大学是根据排名来录取的，所以对于算法也是一样的，我们只关注：“那个算法才是最好的？我们应该选择哪个算法？”这种比较性的问题。</p>
-<h3 id="4-_Ω(N)">4. Ω(N)</h3><blockquote>
-<p>函数f(n) = Ω(g(n))（念作f(n)是g(n)的omega），当且仅当存在正常数c和n0，使得对于所有n (n &gt;= n0)，满足f(n) &gt;= c * g(n)。</p>
-</blockquote>
-<p>Ω(N)给出了算法运行时间的下界，也就是最好情况下的时间复杂度</p>
-<p>基础的数学知识就科普到这里。下面咱们来谈谈如何计算 O(N)</p>
-<hr>
-<h2 id="运行的时间">运行的时间</h2><h3 id="一般法则">一般法则</h3><ol>
-<li>FOR循环：<br>一个FOR循环运行时间至多是该FOR循环内语句的运行时间乘以迭代次数。</li>
-<li><p>嵌套的FOR循环：<br>从里向外分析FOR循环。在一次嵌套循环内部的每条语句总的运行时间为该语句的运行时间乘以该组所有的FOR循环的大小的乘积。<br>举一个例子：O(N^2)</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">    <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; N; j++)</span><br><span class="line">        k++;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>顺序结构：<br>将各个语句的运行时间求和即可。<br>举个例子：下面这个程序先用去O(N),再用去O(N^2),总的时间开销还是O(^2)</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">    A[ i ] = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; N; i++)</span><br><span class="line">    <span class="keyword">for</span> (j = <span class="number">0</span>; j &lt; N; j++)</span><br><span class="line">        k++;</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>IF/ELSE 语句<br>一个判断语句的运行时间不超过分支运行里最常的。</p>
-</li>
-</ol>
-<p>###最大子序列和问题的解<br>我们来举一个大一点的例子，这个例子将要用四个算法来求解最大子序列问题。<br>我们先来科普一下什么叫最大子序列和问题：.</p>
-<blockquote>
-<p>给定一整数序列A1， A2，… An （可能有负数），求A1~An的一个子序列Ai~Aj，使得Ai到Aj的和最大 </p>
-</blockquote>
-<p>例如：整数序列-2, 11, -4, 13, -5, 2, -5, -3, 12, -9的最大子序列的和为21。对于这个问题，最简单也是最容易想到的那就是穷举所有子序列的方法。利用三重循环，依次求出所有子序列的和然后取最大的那个。当然算法复杂度会达到O(n^3)y因为这里面包含一个三重嵌套的FOR循环。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">   <span class="function"><span class="keyword">int</span> <span class="title">maxSubSum1</span><span class="params">(<span class="keyword">int</span> a[],<span class="keyword">int</span> size )</span>   </span><br><span class="line"></span>&#123;  </span><br><span class="line">    <span class="keyword">int</span> maxSum = <span class="number">0</span>;  </span><br><span class="line">    <span class="keyword">for</span> ( <span class="keyword">int</span> i = <span class="number">0</span>; i &lt; size; i++ )  </span><br><span class="line">        <span class="keyword">for</span> ( <span class="keyword">int</span> j = <span class="number">1</span>; j &lt; size; j++ )   </span><br><span class="line">        &#123;  </span><br><span class="line">             <span class="keyword">int</span> thisSum = <span class="number">0</span>;  </span><br><span class="line">             <span class="keyword">for</span> ( <span class="keyword">int</span> k = i; k &lt;= j; k++ )  </span><br><span class="line">                 thisSum += a[k];  </span><br><span class="line">             <span class="keyword">if</span> ( thisSum &gt; maxSum )  </span><br><span class="line">                maxSum = thisSum;  </span><br><span class="line">        &#125;  </span><br><span class="line">    <span class="keyword">return</span> maxSum;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这个代码的第8、9行太好为时间了,算法本身很容易理解，而且很直观的感觉做了很多无用操作。例如：i = 0, j = 3时，会计算a[0] + a[1] +…+ a[3]；而当i = 0, j = 4时候又会计算a[0] + a[1] +…a[4]。<br>所以我们对他改进，改进之后算法用时为O(N^2).</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">long</span> <span class="title">maxSubSum2</span><span class="params">(<span class="keyword">const</span> <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; a)</span> </span><br><span class="line"></span>&#123; </span><br><span class="line">       <span class="keyword">long</span> maxSum = <span class="number">0</span>; </span><br><span class="line">       <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; a.size(); i++) </span><br><span class="line">       &#123; </span><br><span class="line">              <span class="keyword">long</span> thisSum = <span class="number">0</span>; </span><br><span class="line">              <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt; a.size(); j++) </span><br><span class="line">              &#123; </span><br><span class="line">                     thisSum += a[j]; </span><br><span class="line">                     <span class="keyword">if</span> (thisSum &gt; maxSum) </span><br><span class="line">                            maxSum = thisSum; </span><br><span class="line">              &#125; </span><br><span class="line">       &#125; </span><br><span class="line">       <span class="keyword">return</span> maxSum; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这是一个非常直观的穷举法（比上面的分析还有简单些），而且没有多余重复的操作，复杂度为O(N^2) 。其中，thisSum表示a[i] + a[i+1] + … + a[j-1]。</p>
-<p>对这个问题，有一个相对复杂的O(NlogN)的解法，就是使用递归。如果要是求出序列的位置的话，这将是最好的算法了（因为我们后面还会有个O(N)的算法，但是不能求出最大子序列的位置）。该方法我们采用“分治策略”（divide-and-conquer）。</p>
-<p>先简单总结下分治递归的基本过程：</p>
-<pre><code><span class="number">1</span>. 传入待处理的序列集合，及初始下标(iLeft)和终点下标(iRight=N-<span class="number">1</span>,N为元素个数)
-<span class="number">2</span>. 处理小容量问题 e.g:<span class="keyword">if</span>(iLeft == iRight)<span class="decorator">{....}</span>
-<span class="number">3</span>. 将数据从中间分成两部分并将前后两部分依次递归调用。
-<span class="number">4</span>. 处理每个子段的过程。
-</code></pre><p>在我们例子中，最大子序列可能在三个地方出现，或者在左半部，或者在右半部，或者跨越输入数据的中部而占据左右两部分。前两种情况递归求解，第三种情况的最大和可以通过求出前半部分最大和（包含前半部分最后一个元素）以及后半部分最大和（包含后半部分的第一个元素）相加而得到。</p>
-<table>
-<thead>
-<tr>
-<th>前半部分</th>
-<th style="text-align:right">后半部分</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>4 -3 5 -2</td>
-<td style="text-align:right">-1 2 6 -2</td>
-</tr>
-</tbody>
-</table>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">maxSubsequenceSum</span><span class="params">(<span class="keyword">int</span>[] a, <span class="keyword">int</span> left, <span class="keyword">int</span> right)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span>(left == right)&#123;</span><br><span class="line">		<span class="keyword">if</span>(a[left]&gt;<span class="number">0</span>)&#123;</span><br><span class="line">			<span class="keyword">return</span> a[left];</span><br><span class="line">		&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">int</span> center = (left+right)/<span class="number">2</span>; </span><br><span class="line">	<span class="keyword">int</span> maxLeftSum = maxSubsequenceSum(a, left, center); <span class="comment">//递归调用，求左部分的最大和 </span></span><br><span class="line">	<span class="keyword">int</span> maxRightSum = maxSubsequenceSum(a, center+<span class="number">1</span>, right);<span class="comment">//递归调用，求右部分的最大和 </span></span><br><span class="line">	</span><br><span class="line">	<span class="keyword">int</span> leftBorderSum = <span class="number">0</span>, maxLeftBorderSum = <span class="number">0</span>;<span class="comment">//定义左边界子序列的和 </span></span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=center; i&gt;=left; i--)&#123;</span><br><span class="line">		leftBorderSum += a[i];</span><br><span class="line">		<span class="keyword">if</span>(leftBorderSum &gt; maxLeftBorderSum)&#123;</span><br><span class="line">			maxLeftBorderSum = leftBorderSum;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	 <span class="keyword">int</span> rightBorderSum = <span class="number">0</span>, maxRightBorderSum = <span class="number">0</span>;<span class="comment">//定义左边界子序列的和</span></span><br><span class="line">	 <span class="keyword">for</span>(<span class="keyword">int</span> i=center+<span class="number">1</span>; i&lt;=right; i++) &#123;</span><br><span class="line">		  rightBorderSum += a[i];</span><br><span class="line">		  <span class="keyword">if</span>(rightBorderSum &gt; maxRightBorderSum) &#123; </span><br><span class="line">			  maxRightBorderSum = rightBorderSum; </span><br><span class="line">			&#125;</span><br><span class="line">	&#125;</span><br><span class="line">		  </span><br><span class="line">     <span class="keyword">return</span> max3(maxLeftSum, maxRightSum, maxLeftBorderSum + maxRightBorderSum); <span class="comment">//选出这三者中的最大值并返回（max3(int a, int b, int c)的实现没有给出）</span></span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>对这个算法进行分析：</p>
-<p>T(1) = 1<br>T(N) = 2T(N/2) + O(N)<br>最后得出算法的复杂度为：O(NlogN) 。</p>
-
       
     </div>
     
@@ -439,6 +307,10 @@
 	</div>
 
 
+      
+        <p class="article-more-link">
+          <a  href="/2015/08/17/2/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -481,29 +353,6 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h2 id="递归简论">递归简论</h2><p>  大多数数学公式都是又一个简单的函数描述的。例如：</p>
-<p>$$ C = 5（F - 32） / 9  $$        </p>
-<blockquote>
-<p>温度转换</p>
-</blockquote>
-<p>但有的时候会有这种情况</p>
-<blockquote>
-<p>定义一个函数F，满足F（0）= 0， 且F（X）= 2F(X - 1) + X^2</p>
-</blockquote>
-<p>这个函数用它自己来定义的时候就叫做递归（recursive），下面代码指出F的递归实现。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">F</span><span class="params">(<span class="keyword">int</span> X)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (X == <span class="number">0</span>)                         </span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="number">2</span> *F(X - <span class="number">1</span>) + X * X;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>假设当你计算F（4）的时候，实际上是计算F(3)+4×4,这样就需要调用F(3), 计算F（3）的时候需要调用F（2），直到调用F（0）= 0.</p>
-<p>必须注意的是，递归调用将反复进行到直到基准情形出现为止。例如计算F（-1）的值将导致调用F（-2），F（-3）等，这种情况下不可能出现基准情形，所以系统无法算出答案。</p>
-<p>递归函数还有一个需要注意的问题是：定义计算不出来,例如：</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">BAD</span><span class="params">(<span class="keyword">int</span> X)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (X == <span class="number">0</span>)                         </span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> BAD（X / <span class="number">3</span> + <span class="number">1</span>) + X - <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这种错误就是将BAD(1)定义为BAD(1),计算机会反复调用BAD(1),导致计算不出来。  因此递归需要两个基本法则：</p>
-<ol>
-<li>基准情形(base case):你必须重要有某些基准情形，他们不用递归就能求解。</li>
-<li>不断推进(making progress)：对于那些需要递归求解的情形，递归调用必须能够朝着产生基准情形的方向推进。</li>
-<li>设计法则(design rule): 当设计递归程序的时候没有必要知道管理的细节，不必试图追踪大量的递归调用。</li>
-<li>合成效益法则(compound interest rule)：会在以后给予讲解。</li>
-</ol>
-<h3 id="总结">总结</h3><p>着一章为其余部分建立了一个舞台。对于面临大量输入的算法，他所花费的时间是一个判别其好坏的重要标准，我们将在下一章讲述这些问题。并将用这里讨论的数学概念建立一个正式的模型。</p>
-
       
     </div>
     
@@ -520,6 +369,10 @@
 	</div>
 
 
+      
+        <p class="article-more-link">
+          <a  href="/2015/08/17/my-post/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
@@ -541,7 +394,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2015 Yueze_Zhang
+    		&copy; 2015 GaRiboy
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
