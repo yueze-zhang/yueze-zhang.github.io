@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>第三章 表 ADT (3) 线性表链式存储结构 ——单链表 | GaRiboy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="在这一节中，我们主要学习一下线性表链式存储结构，如何声明、调用、查询、插入、删除他们。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第三章 表 ADT (3) 线性表链式存储结构 ——单链表">
+<meta property="og:url" content="http://yoursite.com/2015/08/22/006-ADT3/index.html">
+<meta property="og:site_name" content="GaRiboy">
+<meta property="og:description" content="在这一节中，我们主要学习一下线性表链式存储结构，如何声明、调用、查询、插入、删除他们。">
+<meta property="og:updated_time" content="2015-08-22T12:23:05.678Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第三章 表 ADT (3) 线性表链式存储结构 ——单链表">
+<meta name="twitter:description" content="在这一节中，我们主要学习一下线性表链式存储结构，如何声明、调用、查询、插入、删除他们。">
+  
+    <link rel="alternative" href="/atom.xml" title="GaRiboy" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://i3.tietuku.com/d441d367d73af2a9.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">GaRiboy</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">一个小瘦孩爱上了一个小胖墩儿～</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="/#" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/博客，文章/" style="font-size: 10px;">博客，文章</a> <a href="/tags/博客，笔记/" style="font-size: 20px;">博客，笔记</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">奥巴马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">卡卡的美丽传说</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">本泽马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">吉格斯的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">习大大大不同</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">托蒂的博客</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">GaRiboy</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://i3.tietuku.com/d441d367d73af2a9.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">GaRiboy</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">一个小瘦孩爱上了一个小胖墩儿～</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="/#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-006-ADT3" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/22/006-ADT3/" class="article-date">
+  	<time datetime="2015-08-22T12:20:31.000Z" itemprop="datePublished">2015-08-22</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      第三章 表 ADT (3) 线性表链式存储结构 ——单链表
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/博客，笔记/">博客，笔记</a></li></ul>
+	</div>
+
+        
+	<div class="article-category tagcloud">
+	<a class="article-category-link" href="/categories/数据结构与算法/">数据结构与算法</a>
+	</div>
+
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在这一节中，我们主要学习一下线性表链式存储结构，如何声明、调用、查询、插入、删除他们。</p>
+<a id="more"></a>
+<h2 id="线性表链式存储结构_——单链表">线性表链式存储结构 ——单链表</h2><p>链表中第一个节点的存储位置叫做头指针，最后一个节点指针为空(NULL)。</p>
+<h3 id="头指针与头节点的异同">头指针与头节点的异同</h3><p>头指针：</p>
+<ul>
+<li>头指针是链表指向第一个节点的指针，若链表有头结点，则是指向头结点的指针。</li>
+<li>头指针具有标识作用，所以常用头指针冠以链表的名字（指针变量的名字）</li>
+<li>无论链表是否为空，头指针均不能为空。</li>
+<li>头指针是链表的必要元素。</li>
+</ul>
+<p>头结点：</p>
+<ul>
+<li>头结点是为了操作的统一和方便而设立的，放在第一个元素结点之前，数据域一般无意义</li>
+<li><h2 id="有了头结点，对在第一元素结点前插入节点和删除节点操作就与其他其他操作统一了。">有了头结点，对在第一元素结点前插入节点和删除节点操作就与其他其他操作统一了。 </h2><h3 id="单链表结构">单链表结构</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> Node</span><br><span class="line">&#123;</span><br><span class="line">	ElemType data;        <span class="comment">//数据域</span></span><br><span class="line">	structure Node* Next；<span class="comment">//指针域</span></span><br><span class="line">&#125;Node；</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> Node* LinkList;<span class="comment">//取别名 相当于Node* = LinkList</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>假设 p 是指向线性表第 i 个元素的指针，则该节点 ai 的数据域我们可以用 P-&gt;data 来表示，结点ai的指针域可以用 p-&gt;next 来表示，p-&gt;next 的值是一个指针，那么 p-&gt;next 指向 ai+1。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> DataType;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> node &#123;</span><br><span class="line">    DataType data;</span><br><span class="line">    <span class="keyword">struct</span> node *next;</span><br><span class="line">&#125;*LinkList,Node;</span><br><span class="line"></span><br><span class="line"><span class="comment">//首先分配头结点的地址，然后另头结点数据域=0，之后分配p-&gt;next指针所指向的地址</span></span><br><span class="line"><span class="comment">//把第一个元素输入到p-&gt;next指向的地址，也就是放在data下。</span></span><br><span class="line"><span class="comment">//第三步，令指针p 指向 p-&gt;next</span></span><br><span class="line"></span><br><span class="line"><span class="function">LinkList <span class="title">CreateList</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123; <span class="comment">// 创建链表链表</span></span><br><span class="line">    Node *p,*head;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    head = p = (Node *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">    <span class="comment">//P是一个地址，对这个地址分配内存(包括data和next的地址)，p 是指向线性表第 i 个元素的指针</span></span><br><span class="line">    <span class="keyword">if</span>(head == <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"内存申请失败!\n"</span>);</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    head-&gt;data = (DataType)<span class="number">0</span>;  <span class="comment">//头结点的数据元素=0</span></span><br><span class="line">                                <span class="comment">//P-&gt;data 指向节点 ai 的数据域</span></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"输入%d个整数:\n"</span>,n);</span><br><span class="line">    <span class="keyword">for</span>(i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        p-&gt;next = (Node *)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(Node));</span><br><span class="line">        <span class="comment">//对p-&gt;next分配地址，表示结点 ai 的指针域</span></span><br><span class="line">        <span class="keyword">if</span>(p-&gt;next == <span class="literal">NULL</span>) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">"内存申请失败!\n"</span>);</span><br><span class="line">            <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">scanf</span>(<span class="string">"%d"</span>,&amp;p-&gt;next-&gt;data);<span class="comment">// p-&gt;next-&gt;data等于ai+1数据域的值</span></span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    p-&gt;next = <span class="literal">NULL</span>;</span><br><span class="line">    <span class="keyword">return</span> head;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ShowList</span><span class="params">(LinkList head)</span> </span>&#123;</span><br><span class="line">    Node *p = head-&gt;next;</span><br><span class="line">    <span class="keyword">while</span>(p) &#123;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%d "</span>,p-&gt;data);</span><br><span class="line">        p = p-&gt;next;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"\n"</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    LinkList head = CreateList(<span class="number">5</span>);</span><br><span class="line">    ShowList(head);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="单链表的读取：">单链表的读取：</h3><ul>
+<li>声明一个结点 p 指向链表的第一个结点，初始化 j 从 1 开始；</li>
+<li>当 j &lt; i 时，就遍历链表，让 p 的指针向后移动，不断指向下一节点，j + 1；</li>
+<li>若链表末尾 p 为空，则说明第 i 个元素不存在，</li>
+<li>否则查找成功，返回结点 p 的数据。</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span>  <span class="title">GetElem</span> <span class="params">( LinkList v, <span class="keyword">int</span> i, ElemType *e )</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> j;</span><br><span class="line">	LinkList p;  <span class="comment">//LinkList 相当于 Node* (取别名)， p 为指针</span></span><br><span class="line">	p = v-&gt;next; <span class="comment">//让 p 指向链表 v 的第一个结点</span></span><br><span class="line">	j = <span class="number">1</span>;    <span class="comment">//初始化当前位置计数器，为1</span></span><br><span class="line">	<span class="keyword">while</span> ( p &amp;&amp; j &lt; i)   <span class="comment">//p 不为空 且 未找到</span></span><br><span class="line">	&#123;</span><br><span class="line">		p = p-&gt;next;</span><br><span class="line">		++j;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (!p || j&gt;i)  <span class="comment">//链表结束</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">return</span> ERROR;</span><br><span class="line">	&#125;</span><br><span class="line">	*e = p-&gt;data;</span><br><span class="line">	<span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这个算法的最坏情况时间复杂度为 O(N)。由于单链表的结构中没有定义表长，所以就不能实现知道要循环多少次，因此也就不方便使用for来控制循环。<br>其核心思想叫做“<strong>作指针后移</strong>”，这既是也是很多算法常用的技术。</p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/08/22/005-ADT2/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">第三章 表 ADT (2) 线性表顺序存储结构</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="006-ADT3" data-title="第三章 表 ADT (3) 线性表链式存储结构 ——单链表" data-url="http://yoursite.com/2015/08/22/006-ADT3/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 GaRiboy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
