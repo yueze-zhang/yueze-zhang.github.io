@@ -222,21 +222,7 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <a id="more"></a>
-<h1 id="静态链表"><strong>静态链表</strong></h1><h2 id="用数组代替指针描述单链表。"><strong>用数组代替指针描述单链表。</strong></h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">define</span> MAXSIZE <span class="number">1000</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span></span><br><span class="line">&#123;</span><br><span class="line">	ElemTpye data;        <span class="comment">//数据</span></span><br><span class="line">	<span class="keyword">int</span> cur;              <span class="comment">//游标（cursor)</span></span><br><span class="line">&#125;Component, StaticLinkList[MAXSIZE];</span><br></pre></td></tr></table></figure>
-<p>数组下标为0 和 MAXSIZE 时，不存放任何数据 ，下标为0 时的游标指向第一个没有存放数据的下标，下标为MAXSIZE时的游标指向第一个存放数据的下标。</p>
-<h2 id="初始化"><strong>初始化</strong></h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">InitList</span><span class="params">(StaticLinkList space)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i;</span><br><span class="line">	<span class="keyword">for</span> ( i = <span class="number">0</span>; i &lt; MAXSIZE - <span class="number">1</span>; i++ )</span><br><span class="line">		space[i].cur = i + <span class="number">1</span>;</span><br><span class="line">	space[MAXSIZE-<span class="number">1</span>].cur = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">return</span> OK; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="插入操作"><strong>插入操作</strong></h2><ol>
-<li>让变量 j = space[0].cur，意思是让 j 获取第一个空闲数据的下标</li>
-<li>space[0].cur = space[j].cur，因为space[j]数据为空，所以space[j].cur 肯定=space[j+1]的下标，也就是等于j+1, 这句话的意思让space[0].cur 等于下一个空闲数据的下标：j+1。因为下标为j 的数组data即将被写入元素。</li>
-<li>L[j].data = e， 把元素 e 写在下标为 j 的数组data中。</li>
-<li>k = MAX_SIZE - 1;  k = L[k].cur; 让K等于最后一个数组的下标，这样 L[k].cur 就等于第一个存放数据的下标。</li>
-<li>循环 i-1 次：k = L[k].cur。找到数据第 i -1 的位置。其中 i 代表要把元素 e 插到第 i 个位置</li>
-<li>L[j].cur = L[k].cur; 让新写入的元素 e 的游标等于被插入之前 i-1 位置的游标</li>
-<li>L[k].cur = j;  让数据第 i -1 的位置的游标指向新写入的元素 e 的下标。<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//首先获取空闲分量的下标</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">Malloc_SLL</span> <span class="params">(StaticLinkLIst space)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> i = space[<span class="number">0</span>].cur;     <span class="comment">//把第一个空闲数据的下标给 i</span></span><br><span class="line">	<span class="keyword">if</span> (space[<span class="number">0</span>].cur)</span><br><span class="line">		space[<span class="number">0</span>].cur = space[i].cur;</span><br><span class="line">		<span class="keyword">return</span> i;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">ListInsert</span><span class="params">(StaticLinkList L, <span class="keyword">int</span> i, ElemType e)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">	<span class="keyword">int</span> j, k, l;</span><br><span class="line">	k = MAX_SIZE - <span class="number">1</span>;                  <span class="comment">//K 是数组最后一个元素</span></span><br><span class="line">	<span class="keyword">if</span> ( i&lt;<span class="number">1</span> || i&gt;ListLength(L)+<span class="number">1</span> )</span><br><span class="line">		<span class="keyword">return</span> ERROR;</span><br><span class="line">	j = MaLLoc_SLL(L);                 <span class="comment">//获取空闲分量的下标</span></span><br><span class="line">	<span class="keyword">if</span>( j )</span><br><span class="line">	&#123;</span><br><span class="line">		L[j].data = e;</span><br><span class="line">		<span class="keyword">for</span> ( l = <span class="number">1</span>; l &lt;= i - <span class="number">1</span>; l++ )</span><br><span class="line">		&#123;</span><br><span class="line">			k = L[k].cur;              <span class="comment">// L[k].cur=第一个非空元素的下标</span></span><br><span class="line">		&#125;</span><br><span class="line">		L[j].cur = L[k].cur;</span><br><span class="line">		L[k].cur = j;</span><br><span class="line">		<span class="keyword">return</span> OK;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-
+        <p>在这一节中，我们主要学习一下线性表链式存储结构，如何声明、调用、查询、插入、删除他们。</p>
       
     </div>
     
@@ -253,6 +239,10 @@
 	</div>
 
 
+      
+        <p class="article-more-link">
+          <a  href="/2015/08/24/007-ADT4/#more">more >></a>
+        </p>
       
       <div class="clearfix"></div>
     </div>
