@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>第三章 表 ADT (7) 线性表链式存储结构——双向链表 | GaRiboy</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="~~~">
+<meta property="og:type" content="article">
+<meta property="og:title" content="第三章 表 ADT (7) 线性表链式存储结构——双向链表">
+<meta property="og:url" content="http://yoursite.com/2015/08/26/010-ADT7/index.html">
+<meta property="og:site_name" content="GaRiboy">
+<meta property="og:description" content="~~~">
+<meta property="og:updated_time" content="2015-08-26T07:37:45.378Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="第三章 表 ADT (7) 线性表链式存储结构——双向链表">
+<meta name="twitter:description" content="~~~">
+  
+    <link rel="alternative" href="/atom.xml" title="GaRiboy" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="http://i3.tietuku.com/d441d367d73af2a9.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">GaRiboy</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">一个小瘦孩爱上了一个小胖墩儿～</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="/#" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/博客，文章/" style="font-size: 10px;">博客，文章</a> <a href="/tags/博客，笔记/" style="font-size: 20px;">博客，笔记</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">奥巴马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">卡卡的美丽传说</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">本泽马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">吉格斯的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">习大大大不同</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">托蒂的博客</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">GaRiboy</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="http://i3.tietuku.com/d441d367d73af2a9.jpg" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">GaRiboy</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">一个小瘦孩爱上了一个小胖墩儿～</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="/#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-010-ADT7" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/08/26/010-ADT7/" class="article-date">
+  	<time datetime="2015-08-26T07:35:58.000Z" itemprop="datePublished">2015-08-26</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      第三章 表 ADT (7) 线性表链式存储结构——双向链表
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><del>~</del>~~<br><a id="more"></a></p>
+<h1 id="双向链表"><strong>双向链表</strong></h1><h2 id="1-_双向链表结点结构"><strong>1. 双向链表结点结构</strong></h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> <span class="comment">//struct 后面的名字是可选的，称为结构标记</span></span><br><span class="line"> <span class="comment">//结构标记用于为结构命名，在定义之后，结构标记就代表花括号内的声明，可以用它作为该声明的简写形式</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> DualNode  </span><br><span class="line">&#123;</span><br><span class="line">	ElemType data;</span><br><span class="line">	<span class="comment">//定义一个struct DualNode 类型的指针变量*prior, 如果p指向一个结构，那么*p即为该结构</span></span><br><span class="line">	<span class="keyword">struct</span> DualNode *prior;    <span class="comment">//前驱结点</span></span><br><span class="line">	<span class="keyword">struct</span> DualNode *next;	   <span class="comment">//后继结点</span></span><br><span class="line">&#125; DualNode, *Dulinklist;</span><br></pre></td></tr></table></figure>
+<p>struct 声明定义一种数据类型，在标志结构成员表结束的右花括号之后可以跟一个变量表。这与其他基本类型的变量声明是相同的。例如<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">struct</span> &#123;……&#125;x, y, z;</span><br><span class="line"><span class="keyword">int</span> x, y, z;</span><br></pre></td></tr></table></figure></p>
+<p>这两种声明具有类似的意义，都将x, y,z 声明为指定类型的变量，并且为他们分配储存空间。<br>在定义了结构体变量后，系统会为之分配内存单元。<br><strong>一个结构体变量的指针就是该结构体变量所占据的内存段的起始地址。</strong><br>可以设一个指针变量，用来指向一个结构体变量，此时该指针变量的值是结构体变量的起始地址。（指针伟大吧，指啥都行~）</p>
+<h2 id="2-_双向链表的插入操作"><strong>2. 双向链表的插入操作</strong></h2><p>假设要插入的结点为 s；插在 p 前面：（顺序不能错）<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">s-&gt;next = p;				<span class="comment">//让插入的结点next指向下一个结点</span></span><br><span class="line">s-&gt;prior = p-&gt;prior;		<span class="comment">//让插入的结点prior指向上一个结点</span></span><br><span class="line">p-&gt;prior-&gt;next = s;			<span class="comment">//让上一个结点的next指向插入的结点s</span></span><br><span class="line">p-&gt;prior = s;				<span class="comment">//让下一个结点的prior指向插入的结点s</span></span><br></pre></td></tr></table></figure></p>
+<h2 id="3-_双向链表的删除操作"><strong>3. 双向链表的删除操作</strong></h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">p-&gt;prior-&gt;next = p-&gt;next;</span><br><span class="line">p-&gt;next-&gt;prior = p-&gt;prior;</span><br><span class="line"><span class="built_in">free</span>(p);</span><br></pre></td></tr></table></figure>
+<h2 id="4-_例子"><strong>4. 例子</strong></h2><p>双向链表打印A到Z， 并且可以前后移动<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">include</span><span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> OK <span class="number">1</span></span></span><br><span class="line"><span class="preprocessor">#<span class="keyword">define</span> ERROR <span class="number">0</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">char</span> ElemType;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int</span> Status;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> DualNode</span><br><span class="line">&#123;</span><br><span class="line">	ElemType data;</span><br><span class="line">	<span class="keyword">struct</span> DualNode *prior;    <span class="comment">//前驱结点</span></span><br><span class="line">	<span class="keyword">struct</span> DualNode *next;	   <span class="comment">//后继结点</span></span><br><span class="line">&#125; DualNode, *Dulinklist;       <span class="comment">//给结构体取两个名字，分别叫DualNode 和*Dulinklist</span></span><br><span class="line"></span><br><span class="line"><span class="function">Status <span class="title">InitList</span><span class="params">(Dulinklist *L)</span>   <span class="comment">//传进来的是一个指向变量L的指针 对它间接寻址（*）,得到的是他内容</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    DualNode *p, *q;</span><br><span class="line">    <span class="keyword">int</span> i;</span><br><span class="line">    *L = (Dulinklist)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(DualNode));     </span><br><span class="line">    <span class="keyword">if</span> (!(*L))</span><br><span class="line">        <span class="keyword">return</span> ERROR;</span><br><span class="line">    (*L)-&gt;next = (*L)-&gt;prior = <span class="literal">NULL</span>;</span><br><span class="line">    p = (*L);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> (i=<span class="number">0</span>; i &lt; <span class="number">26</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        q = (DualNode*)<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(DualNode));</span><br><span class="line">        <span class="keyword">if</span> (!q)</span><br><span class="line">            <span class="keyword">return</span> ERROR;</span><br><span class="line">        q-&gt;data = <span class="string">'A'</span> + i;</span><br><span class="line">        q-&gt;prior = p;</span><br><span class="line">        q-&gt;next = p-&gt;next;</span><br><span class="line">        p-&gt;next = q;</span><br><span class="line">        p = q;</span><br><span class="line">    &#125;</span><br><span class="line">    p-&gt;next = (*L)-&gt;next;</span><br><span class="line">    (*L)-&gt;next-&gt;prior = p;</span><br><span class="line">    <span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">Caeaar</span><span class="params">(Dulinklist *L,  <span class="keyword">int</span> i)</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (i &gt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">do</span></span><br><span class="line">        &#123;</span><br><span class="line">            (*L) = (*L)-&gt;next;</span><br><span class="line">        &#125;<span class="keyword">while</span>(--i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (i &lt; <span class="number">0</span>)</span><br><span class="line">    &#123;</span><br><span class="line">         <span class="keyword">do</span></span><br><span class="line">        &#123;</span><br><span class="line">            (*L) = (*L)-&gt;next;</span><br><span class="line">        &#125;<span class="keyword">while</span>(++i);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span><br><span class="line"></span>&#123;</span><br><span class="line">    Dulinklist L;    </span><br><span class="line">    <span class="comment">//*Dulinklist是一个指针类型。L的内容是一个指针，</span></span><br><span class="line">    <span class="keyword">int</span> i, n;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%d\n"</span>,&amp;n);</span><br><span class="line">    InitList(&amp;L);  <span class="comment">//&amp;L代表L存放的地址，同时也表示指向变量L的指针</span></span><br><span class="line">    Caeaar(&amp;L, n);</span><br><span class="line">    <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; <span class="number">26</span>; i++)</span><br><span class="line">    &#123;</span><br><span class="line">        L = L-&gt;next;</span><br><span class="line">        <span class="built_in">printf</span>(<span class="string">"%c"</span>,L-&gt;data);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2015/08/26/009-ADT6/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">第三章 表 ADT (6) 用循环列表解决各种问题</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="010-ADT7" data-title="第三章 表 ADT (7) 线性表链式存储结构——双向链表" data-url="http://yoursite.com/2015/08/26/010-ADT7/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 GaRiboy
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
